@@ -12,3 +12,13 @@
 │   └── Python Backend
     
 ```
+
+## Course Information
+- **Instructor**: Dr. Ayan Banerjee,
+- **TA**: Sameena Hossain,
+
+## Teammates
+- Eshan Gaur
+- Mayank Batra
+- Quinn Fischer
+- William Gibbs
