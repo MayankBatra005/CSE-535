@@ -5,4 +5,6 @@
     <string name="submit">Submit </string>
     <string name="chat_window">Chat Window .....</string>
     <string name="message_hint">Enter Message....</string>
+    <string name="user">mayank</string>
+    <string name="passwd">1234</string>
 </resources>

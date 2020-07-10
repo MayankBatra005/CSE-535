@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.HomeScreen"/>
+        <activity android:name=".Activities.ChatScreen"/>
     </application>
 
 </manifest>
