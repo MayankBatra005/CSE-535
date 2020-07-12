@@ -33,6 +33,7 @@ public class Data {
     // dbname and table name are same
     public SQLiteDatabase initDB(Context context)
     {
+        // Add primary key and unique sr no auto increment
        try{
             db=SQLiteDatabase.openOrCreateDatabase(dbName,null);
             String sql="CREATE TABLE IF NOT EXISTS "+Data.getInstance().getDbName()+
