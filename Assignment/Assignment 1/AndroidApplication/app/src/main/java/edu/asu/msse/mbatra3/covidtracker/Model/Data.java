@@ -1,10 +1,21 @@
 package edu.asu.msse.mbatra3.covidtracker.Model;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class Data {
     String dbName;
+    SQLiteDatabase db;
+
+//    public SQLiteDatabase getDb() {
+//        return db;
+//    }
+//
+//    public void setDb(SQLiteDatabase db) {
+//        this.db = db;
+//    }
+
     public static Data object;
 
     private Data()
@@ -27,10 +38,11 @@ public class Data {
         this.dbName = dbName;
     }
 
+    // dbname and table name are same
     public SQLiteDatabase initDB(Context context)
     {
        try{
-            SQLiteDatabase db=SQLiteDatabase.openOrCreateDatabase(dbName,null);
+            db=SQLiteDatabase.openOrCreateDatabase(dbName,null);
             String sql="CREATE TABLE IF NOT EXISTS "+Data.getInstance().getDbName()+
                     "( XCOORDINATE VARCHAR," +
                     "YCOORDINATE VARCHAR, TIMESTAMP VARCHAR)";
@@ -45,15 +57,53 @@ public class Data {
         return null;
     }
 
-    public boolean insertData(String x,String y,String timeStamp,SQLiteDatabase db)
+    public boolean insertData(String x,String y,String timeStamp)
     {
+        if(db==null)
+        {
+            return false;
+        }else {
 
-        try {
-            String sql="INSERT INTO"+Data.getInstance().getDbName();
-        }catch(Exception e){
-            e.printStackTrace();
+            try {
+                String sql = "INSERT INTO" + Data.getInstance().getDbName() + "" +
+                        "(XCOORDINATE,YCOORDINATE,TIMESTAMP) VALUES ('" + x + "','" + y + "','"
+                        + timeStamp + "')";
+                db.execSQL(sql);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        return false;
+        return true;
     }
 
+    public String fetchData(String x,String y)
+    {
+        String result,sql;
+        sql="SELECT * FROM "+Data.getInstance().getDbName()+"WHERE XCOORDINATE="+x+
+                "AND YCOORDINATE="+y;
+        Cursor c=db.rawQuery(sql,null);
+        int xIndex,yIndex;
+        xIndex=c.getColumnIndex("XCOORDINATE");
+        yIndex=c.getColumnIndex("YCOORDINATE");
+        c.moveToFirst();
+        while(c!=null)
+        {
+
+            c.moveToNext();
+        }
+
+        result="";
+        return result;
+    }
+
+    public boolean closeDb()
+    {
+        if(db==null){
+            return true;
+        }else{
+            db.close();
+        return true;
+        }
+    }
 }
