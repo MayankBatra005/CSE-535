@@ -4,30 +4,52 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 public class Data {
+    String dbName;
+    public static Data object;
 
-    public boolean initDB(String dbName, Context context)
+    private Data()
     {
-        boolean isDbInit=false;
-        try{
+    }
+
+    public static Data getInstance()
+    {
+        if(object==null){
+            object=new Data();
+        }
+        return object;
+    }
+
+    public String getDbName() {
+        return dbName;
+    }
+
+    public void setDbName(String dbName) {
+        this.dbName = dbName;
+    }
+
+    public SQLiteDatabase initDB(Context context)
+    {
+       try{
             SQLiteDatabase db=SQLiteDatabase.openOrCreateDatabase(dbName,null);
-            String sql="CREATE TABLE IF NOT EXISTS "+dbName+"( XCOORDINATE VARCHAR," +
+            String sql="CREATE TABLE IF NOT EXISTS "+Data.getInstance().getDbName()+
+                    "( XCOORDINATE VARCHAR," +
                     "YCOORDINATE VARCHAR, TIMESTAMP VARCHAR)";
             db.execSQL(sql);
-            isDbInit= true;
+            return db;
 
         }
         catch (Exception E)
         {
             E.printStackTrace();
         }
-        return isDbInit;
+        return null;
     }
 
-    public boolean insertData(String x,String y,String timeStamp)
+    public boolean insertData(String x,String y,String timeStamp,SQLiteDatabase db)
     {
 
         try {
-
+            String sql="INSERT INTO"+Data.getInstance().getDbName();
         }catch(Exception e){
             e.printStackTrace();
         }
