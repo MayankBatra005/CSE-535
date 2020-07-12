@@ -8,14 +8,6 @@ public class Data {
     String dbName;
     SQLiteDatabase db;
 
-//    public SQLiteDatabase getDb() {
-//        return db;
-//    }
-//
-//    public void setDb(SQLiteDatabase db) {
-//        this.db = db;
-//    }
-
     public static Data object;
 
     private Data()
@@ -80,6 +72,7 @@ public class Data {
     public String fetchData(String x,String y)
     {
         String result,sql;
+        result="EMPTY";
         sql="SELECT * FROM "+Data.getInstance().getDbName()+"WHERE XCOORDINATE="+x+
                 "AND YCOORDINATE="+y;
         Cursor c=db.rawQuery(sql,null);
@@ -89,11 +82,11 @@ public class Data {
         c.moveToFirst();
         while(c!=null)
         {
-
+            result=c.getString(xIndex)+" "+c.getString(yIndex);
             c.moveToNext();
         }
-
-        result="";
+        if (result.equals("EMPTY")){
+        result="No Result Found";}
         return result;
     }
 
