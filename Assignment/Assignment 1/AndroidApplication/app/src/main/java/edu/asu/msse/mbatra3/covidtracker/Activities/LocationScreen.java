@@ -31,14 +31,17 @@ public class LocationScreen extends AppCompatActivity {
     LocationListener locationListener;
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission
+                    .ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
 
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIME_INTERVAL, GPS_DISTANCE, locationListener);
+                locationManager.requestLocationUpdates(LocationManager.
+                        GPS_PROVIDER, GPS_TIME_INTERVAL, GPS_DISTANCE, locationListener);
 
         }
 
@@ -82,25 +85,30 @@ public class LocationScreen extends AppCompatActivity {
         // If device is running SDK < 23
 
         if (Build.VERSION.SDK_INT < 23) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.
+                    ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
 
 
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
+                    0, locationListener);
 
         } else {
 
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.
+                    ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
                 // ask for permission
 
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.
+                        ACCESS_FINE_LOCATION}, 1);
 
 
             } else {
 
                 // we have permission!
 
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
+                        0, locationListener);
 
             }
 
