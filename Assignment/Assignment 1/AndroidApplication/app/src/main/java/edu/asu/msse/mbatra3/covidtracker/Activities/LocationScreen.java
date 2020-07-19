@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -60,6 +61,7 @@ public class LocationScreen extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                test(location);
                 Log.i("Location", location.toString());
+                extractRawCoordinates(location);
 
             }
 
@@ -116,8 +118,18 @@ public class LocationScreen extends AppCompatActivity {
 
     }
     public void test(Location location){
-        Toast.makeText(this,location.toString(),Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,location.toString(),Toast.LENGTH_SHORT).show();
     }
 
+    public String[] extractRawCoordinates(Location location){
+        String[] coordinates=new String[2];
+        TextView textView3=findViewById(R.id.textView3);
+        textView3.setText(location.toString());
+        coordinates[0]=""+location.getLongitude();
+        coordinates[1]=""+location.getLatitude();
+        Toast.makeText(this,"xcordinate: "+ coordinates[0]+" & "+"ycoordinate: "+
+                coordinates[1],Toast.LENGTH_SHORT).show();
+        return coordinates;
+    }
 
 }
