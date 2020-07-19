@@ -32,7 +32,7 @@ public class Data {
 
     // dbname and table name are same
     public SQLiteDatabase initDB(Context context)
-    {
+        {
         // Add primary key and unique sr no auto increment
        try{
             db=SQLiteDatabase.openOrCreateDatabase(dbName,null);
@@ -75,7 +75,7 @@ public class Data {
         String result,sql;
         result="EMPTY";
         sql="SELECT * FROM "+Data.getInstance().getDbName()+"WHERE XCOORDINATE="+x+
-                "AND YCOORDINATE="+y;
+            "AND YCOORDINATE="+y;
         Cursor c=db.rawQuery(sql,null);
         int xIndex,yIndex;
         xIndex=c.getColumnIndex("XCOORDINATE");
