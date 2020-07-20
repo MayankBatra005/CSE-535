@@ -105,19 +105,20 @@ int j=0;
         while(j<counting)
         {
          //   result=c.getString(xIndex)+" "+c.getString(yIndex);
-            results.add(c.getString(xIndex));
-//                    +"&&"+c.getString(yIndex));
+            results.add(c.getString(xIndex)
+                    +"&&"+c.getString(yIndex));
             Log.i("internal Results",results.get(j));
             c.moveToNext();
             j++;
         }
 
 
-//       int i=0;
-//        while(i<results.size())
-//        {
-//            Log.i("Result "+i,results.get(i));
-//        }
+       int i=0;
+        while(i<results.size())
+        {
+            Log.i("Result "+i,results.get(i));
+        i++;
+        }
 
         if (result.equals("EMPTY")){
         result="No Result Found";}
