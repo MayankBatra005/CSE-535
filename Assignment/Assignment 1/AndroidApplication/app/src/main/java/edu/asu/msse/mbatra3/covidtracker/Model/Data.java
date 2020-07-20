@@ -83,6 +83,7 @@ public class Data {
         return true;
     }
 
+    // fetching data for specific coordinates
     public String fetchData(String x,String y)
     {
         String result,sql;
@@ -101,7 +102,7 @@ public class Data {
         yIndex=c.getColumnIndex("YCOORDINATE");
         c.moveToFirst();
         int counting=c.getCount();
-int j=0;
+        int j=0;
         while(j<counting)
         {
          //   result=c.getString(xIndex)+" "+c.getString(yIndex);
@@ -111,7 +112,6 @@ int j=0;
             c.moveToNext();
             j++;
         }
-
 
        int i=0;
         while(i<results.size())
@@ -126,6 +126,31 @@ int j=0;
         Log.i("Count",""+count);
         return result;
 
+    }
+
+    // fetching all data points
+    public ArrayList<String> fetchData2()
+    {
+        ArrayList<String> results= new ArrayList<>();
+        String sql=" SELECT * FROM "+Data.getInstance().getDbName();
+        Cursor c=db.rawQuery(sql,null);
+        int xIndex,yIndex;
+        xIndex=c.getColumnIndex("XCOORDINATE");
+        yIndex=c.getColumnIndex("YCOORDINATE");
+        c.moveToFirst();
+        int counting=c.getCount();
+        int j=0;
+        while(j<counting)
+        {
+            //   result=c.getString(xIndex)+" "+c.getString(yIndex);
+            results.add(c.getString(xIndex)
+                    +"&&"+c.getString(yIndex));
+            Log.i("internal Results",results.get(j));
+            c.moveToNext();
+            j++;
+        }
+
+        return results;
     }
 
     public boolean closeDb()

@@ -1,28 +1,23 @@
 package edu.asu.msse.mbatra3.covidtracker.Activities;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import edu.asu.msse.mbatra3.covidtracker.Model.Data;
 import edu.asu.msse.mbatra3.covidtracker.R;
 
 public class LocationScreen extends AppCompatActivity {
@@ -61,7 +56,14 @@ public class LocationScreen extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                test(location);
                 Log.i("Location", location.toString());
-                extractRawCoordinates(location);
+                String[] coordinates=extractRawCoordinates(location);
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                if(Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
+                        ""+timestamp)){
+                    Log.i("Insertion","Success");}
+
+                ArrayList<String> result=Data.getInstance().fetchData2();
+
 
             }
 

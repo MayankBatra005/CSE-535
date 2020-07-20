@@ -33,11 +33,13 @@ public class Login extends AppCompatActivity {
                 Data.getInstance().setDbName(this,getString(R.string.user));
                if( Data.getInstance().initDB(this))
                    Log.i("Database initialisation","Success");
-
+            /*
+                Code to verify database insertion and fetching
                if(Data.getInstance().insertData(""+1,""+2,""+3)){
                    Log.i("Insertion","Success");}
                String result=Data.getInstance().fetchData(""+1,""+2);
                Log.i("Result",result);
+            */
             }
             Intent home=new Intent(this,HomeScreen.class);
             startActivity(home);
