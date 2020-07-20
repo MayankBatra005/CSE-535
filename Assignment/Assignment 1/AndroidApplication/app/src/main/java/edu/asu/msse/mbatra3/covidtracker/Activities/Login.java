@@ -1,6 +1,7 @@
 package edu.asu.msse.mbatra3.covidtracker.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import edu.asu.msse.mbatra3.covidtracker.Model.Data;
 import edu.asu.msse.mbatra3.covidtracker.R;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +28,17 @@ public class Login extends AppCompatActivity {
         if((usr.equals(getString(R.string.user)))&&(pswd.equals(getString(R.string.passwd))))
         {
             Log.i("User login","Success");
+            // DB not created intialise it
+            if(Data.getInstance().getDb()==null){
+                Data.getInstance().setDbName(this,getString(R.string.user));
+               if( Data.getInstance().initDB(this))
+                   Log.i("Database initialisation","Success");
+
+               if(Data.getInstance().insertData(""+1,""+2,""+3)){
+                   Log.i("Insertion","Success");}
+               String result=Data.getInstance().fetchData(""+1,""+2);
+               Log.i("Result",result);
+            }
             Intent home=new Intent(this,HomeScreen.class);
             startActivity(home);
         }else{
