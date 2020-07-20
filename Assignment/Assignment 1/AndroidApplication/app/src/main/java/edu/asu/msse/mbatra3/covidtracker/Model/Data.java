@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class Data {
     String dbName;
     SQLiteDatabase db=null;
@@ -85,21 +87,44 @@ public class Data {
     {
         String result,sql;
         result="EMPTY";
+
         sql="SELECT * FROM "+Data.getInstance().getDbName()+" WHERE XCOORDINATE = "+x+
             " AND YCOORDINATE = "+y;
+        String countSql="SELECT COUNT(*) FROM "+Data.getInstance().getDbName();
+        Cursor counter=db.rawQuery(countSql,null);
+        int count=counter.getCount();
+       // String[] results= new String[count];
+        ArrayList<String> results= new ArrayList<>();
         Cursor c=db.rawQuery(sql,null);
         int xIndex,yIndex;
         xIndex=c.getColumnIndex("XCOORDINATE");
         yIndex=c.getColumnIndex("YCOORDINATE");
         c.moveToFirst();
-        while(c!=null)
+        int counting=c.getCount();
+int j=0;
+        while(j<counting)
         {
-            result=c.getString(xIndex)+" "+c.getString(yIndex);
+         //   result=c.getString(xIndex)+" "+c.getString(yIndex);
+            results.add(c.getString(xIndex));
+//                    +"&&"+c.getString(yIndex));
+            Log.i("internal Results",results.get(j));
             c.moveToNext();
+            j++;
         }
+
+
+//       int i=0;
+//        while(i<results.size())
+//        {
+//            Log.i("Result "+i,results.get(i));
+//        }
+
         if (result.equals("EMPTY")){
         result="No Result Found";}
+
+        Log.i("Count",""+count);
         return result;
+
     }
 
     public boolean closeDb()
