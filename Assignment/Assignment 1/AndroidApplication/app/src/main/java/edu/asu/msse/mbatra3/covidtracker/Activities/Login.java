@@ -35,12 +35,12 @@ public class Login extends AppCompatActivity {
                 Data.getInstance().setDbName(this,getString(R.string.user));
                if( Data.getInstance().initDB(this))
                    Log.i("Database initialisation","Success");
-                FileIoOperations obj=new FileIoOperations();
-                try {
-                    obj.readDbFile(this);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                FileIoOperations obj=new FileIoOperations();
+//                try {
+//                    obj.readDbFile(this);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
             /*
                 Code to verify database insertion and fetching
                if(Data.getInstance().insertData(""+1,""+2,""+3)){
