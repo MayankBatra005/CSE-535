@@ -5,8 +5,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import edu.asu.msse.mbatra3.covidtracker.R;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
 public class HomeScreen extends AppCompatActivity {
     @Override
