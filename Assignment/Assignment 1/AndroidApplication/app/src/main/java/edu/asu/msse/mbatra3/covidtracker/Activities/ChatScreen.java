@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutionException;
 import androidx.appcompat.app.AppCompatActivity;
 import edu.asu.msse.mbatra3.covidtracker.R;
 import edu.asu.msse.mbatra3.covidtracker.utilities.ChatHelper;
+import edu.asu.msse.mbatra3.covidtracker.utilities.UploadTask;
 
 public class ChatScreen extends AppCompatActivity {
     @Override
@@ -33,8 +34,11 @@ public class ChatScreen extends AppCompatActivity {
 
         // in the end upload the text file
 
-        ChatHelper task= new ChatHelper();
-        task.generateChatFile(this,"ChatFile.txt",chatMessage.getText().toString());
+        ChatHelper task= ChatHelper.getInstance();
+        task.initFile(this);
+        task.generateChatFile("ChatFile.txt",chatMessage.getText().toString());
+        UploadTask upload=new UploadTask(this);
+        upload.execute();
         chatMessage.setText(" ");
 //        String result=null;
 //        try {

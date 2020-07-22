@@ -1,5 +1,6 @@
 package edu.asu.msse.mbatra3.covidtracker.utilities;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
@@ -18,6 +19,16 @@ import java.net.URLConnection;
 
 public class UploadTask extends AsyncTask<String, String, String> {
 
+//    public File getChatFile(Context context){
+//
+//        return new File(context.getFilesDir().getPath()+"/Chat/ChatFile.txt");
+//    }
+
+    Context context;
+   public  UploadTask(Context context){
+        this.context=context;
+    }
+
     @Override
     protected String doInBackground(String... strings) {
         try {
@@ -29,7 +40,10 @@ public class UploadTask extends AsyncTask<String, String, String> {
             String accept = "1";
 
 
-            File videoFile = new File(Environment.getExternalStorageDirectory()+"/my_folder/Action1.mp4");
+//            File videoFile = new File(Environment.getExternalStorageDirectory()+"/my_folder/Action1.mp4");
+
+            // Create function  in chat helper class and it will return the file object over here
+            File videoFile = new File(context.getFilesDir().getPath()+"/Chat/ChatFile.txt");
             String boundary = Long.toHexString(System.currentTimeMillis()); // Just generate some unique random value.
             String CRLF = "\r\n"; // Line separator required by multipart/form-data.
 
@@ -105,7 +119,7 @@ public class UploadTask extends AsyncTask<String, String, String> {
 
             // Request is lazily fired whenever you need to obtain information about response.
             int responseCode = ((HttpURLConnection) connection).getResponseCode();
-            System.out.println(responseCode); // Should be 200
+            Log.i("Response code ",""+responseCode); // Should be 200
 
         } catch (IOException e) {
             e.printStackTrace();
