@@ -25,19 +25,28 @@ public class ChatScreen extends AppCompatActivity {
         EditText chatMessage=findViewById(R.id.chatMessage);
         TextView chatWindow=findViewById(R.id.chatWindow);
         chatWindow.setText("Chat updated "+chatMessage.getText());
-        chatMessage.setText(" ");
+        // chatMessage.setText(" ");
+        // Check if text file is created or not
+        // if not created then create one
+        // and add the text to the file
+        // else append text to the file
+
+        // in the end upload the text file
+
         ChatHelper task= new ChatHelper();
-        String result=null;
-        try {
-            result =
-//            task.execute("https://www.google.com/").get();
-                    task.execute("http://10.218.107.121/").get();
-        }catch (Exception E){
-
-        }    Log.i("Result from ASU server",result);
-
-        Intent location=new Intent(this,LocationScreen.class);
-        startActivity(location);
+        task.generateChatFile(this,"ChatFile.txt",chatMessage.getText().toString());
+        chatMessage.setText(" ");
+//        String result=null;
+//        try {
+//            result =
+////            task.execute("https://www.google.com/").get();
+//                    task.execute("http://10.218.107.121/").get();
+//        }catch (Exception E){
+//
+//        }    Log.i("Result from ASU server",result);
+//
+//        Intent location=new Intent(this,LocationScreen.class);
+//        startActivity(location);
 
     }
 

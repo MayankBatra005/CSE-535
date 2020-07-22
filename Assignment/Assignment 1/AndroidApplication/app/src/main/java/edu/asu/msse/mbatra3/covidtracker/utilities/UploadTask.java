@@ -24,8 +24,8 @@ public class UploadTask extends AsyncTask<String, String, String> {
 
             String url = "http://10.218.107.121/cse535/upload_video.php";
             String charset = "UTF-8";
-            String group_id = "40";
-            String ASUid = "1200072576";
+            String group_id = "4";
+            String ASUid = "1216214610";
             String accept = "1";
 
 
@@ -65,7 +65,9 @@ public class UploadTask extends AsyncTask<String, String, String> {
                 // Send video file.
                 writer.append("--" + boundary).append(CRLF);
                 writer.append("Content-Disposition: form-data; name=\"uploaded_file\"; filename=\"" + videoFile.getName() + "\"").append(CRLF);
-                writer.append("Content-Type: video/mp4; charset=" + charset).append(CRLF); // Text file itself must be saved in this charset!
+//                writer.append("Content-Type: video/mp4; charset=" + charset).append(CRLF); // Text file itself must be saved in this charset!
+                // changing for sqlite DB
+                writer.append("Content-Type: sqlite/db; charset=" + charset).append(CRLF); // Text file itself must be saved in this charset!
                 writer.append(CRLF).flush();
                 FileInputStream vf = new FileInputStream(videoFile);
                 try {
