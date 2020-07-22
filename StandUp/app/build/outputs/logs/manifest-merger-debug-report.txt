@@ -1,0 +1,119 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:18:1-48:12
+INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:18:1-48:12
+INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:18:1-48:12
+INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:18:1-48:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/9bab41cd1cac7e96d8cf039a3df31825/appcompat-v7-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/5b6a00a2676180cfac2988c9b1637b0f/constraint-layout-1.1.2/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/af44a2020543186d4e4449c2c57f9562/support-fragment-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/1f2892c38e9840c58ab405413fb28632/animated-vector-drawable-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/737391e76ecd5748c55f71a982c2dc3e/support-core-ui-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/ec9a9e48e73878aaa31602796e8d1fcf/support-core-utils-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/d71c4a7453c2c65e83a32ca7f1ac2b2d/support-vector-drawable-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/ea0ee35f22a88ff9d8bac691cda371e2/support-compat-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/92a577ba1cbf7d21b00d35b3ea7a240d/livedata-core-1.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/ef6843ea5770e504c24b448e1bb8a0a9/viewmodel-1.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/c06d85bc43379e950603fd5693ef4696/runtime-1.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/0a2bdce0da8cfd5c768a5af1598d6c65/runtime-1.1.0/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:18:1-48:12
+INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:18:1-48:12
+INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:18:1-48:12
+	package
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:19:5-47
+		INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:18:1-48:12
+		INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:18:1-48:12
+		INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:18:11-69
+application
+ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:21:5-46:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/5b6a00a2676180cfac2988c9b1637b0f/constraint-layout-1.1.2/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/5b6a00a2676180cfac2988c9b1637b0f/constraint-layout-1.1.2/AndroidManifest.xml:9:5-20
+	android:supportsRtl
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:26:9-35
+	android:label
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:24:9-41
+	android:roundIcon
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:25:9-54
+	android:icon
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:23:9-43
+	android:allowBackup
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:22:9-35
+	android:theme
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:27:9-40
+activity#com.android.fundamentals.standup.MainActivity
+ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:28:9-34:20
+	android:name
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:28:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:29:13-33:29
+action#android.intent.action.MAIN
+ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:30:17-69
+	android:name
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:30:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:32:17-77
+	android:name
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:32:27-74
+receiver#com.android.fundamentals.standup.AlarmReceiver
+ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:36:9-40:20
+	android:enabled
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:38:13-35
+	android:exported
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:39:13-37
+	android:name
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:37:13-42
+receiver#com.android.fundamentals.standup.AlarmReceiver2
+ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:41:9-45:20
+	android:enabled
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:43:13-35
+	android:exported
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:44:13-37
+	android:name
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml:42:13-43
+uses-sdk
+INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/9bab41cd1cac7e96d8cf039a3df31825/appcompat-v7-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/9bab41cd1cac7e96d8cf039a3df31825/appcompat-v7-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/5b6a00a2676180cfac2988c9b1637b0f/constraint-layout-1.1.2/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.2] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/5b6a00a2676180cfac2988c9b1637b0f/constraint-layout-1.1.2/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/af44a2020543186d4e4449c2c57f9562/support-fragment-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/af44a2020543186d4e4449c2c57f9562/support-fragment-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/1f2892c38e9840c58ab405413fb28632/animated-vector-drawable-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/1f2892c38e9840c58ab405413fb28632/animated-vector-drawable-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/737391e76ecd5748c55f71a982c2dc3e/support-core-ui-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/737391e76ecd5748c55f71a982c2dc3e/support-core-ui-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/ec9a9e48e73878aaa31602796e8d1fcf/support-core-utils-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/ec9a9e48e73878aaa31602796e8d1fcf/support-core-utils-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/d71c4a7453c2c65e83a32ca7f1ac2b2d/support-vector-drawable-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/d71c4a7453c2c65e83a32ca7f1ac2b2d/support-vector-drawable-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/ea0ee35f22a88ff9d8bac691cda371e2/support-compat-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/ea0ee35f22a88ff9d8bac691cda371e2/support-compat-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/92a577ba1cbf7d21b00d35b3ea7a240d/livedata-core-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/92a577ba1cbf7d21b00d35b3ea7a240d/livedata-core-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/ef6843ea5770e504c24b448e1bb8a0a9/viewmodel-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/ef6843ea5770e504c24b448e1bb8a0a9/viewmodel-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/c06d85bc43379e950603fd5693ef4696/runtime-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/c06d85bc43379e950603fd5693ef4696/runtime-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/0a2bdce0da8cfd5c768a5af1598d6c65/runtime-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/eshangaur/.gradle/caches/transforms-2/files-2.1/0a2bdce0da8cfd5c768a5af1598d6c65/runtime-1.1.0/AndroidManifest.xml:20:5-44
+INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+		ADDED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/eshangaur/Documents/GitHub/android-fundamentals-apps-v2/StandUp/app/src/main/AndroidManifest.xml
