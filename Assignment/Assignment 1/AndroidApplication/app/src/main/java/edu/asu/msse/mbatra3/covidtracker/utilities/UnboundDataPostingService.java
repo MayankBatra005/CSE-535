@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import edu.asu.msse.mbatra3.covidtracker.Activities.LocationScreen;
 import edu.asu.msse.mbatra3.covidtracker.Model.Data;
 
 public class UnboundDataPostingService extends Service {
@@ -43,6 +44,10 @@ public class UnboundDataPostingService extends Service {
             @Override
             public void run() {
                 //your method
+
+
+
+
                 databaseInsertion();
             }
         }, 0, 1000);
@@ -75,10 +80,6 @@ public class UnboundDataPostingService extends Service {
         Log.i("On Create", "Service Created");
         locationManager = (LocationManager) this.getSystemService(this.LOCATION_SERVICE);
 
-
-
-
-
         locationListener = new LocationListener() {
 
             @Override
@@ -90,6 +91,14 @@ public class UnboundDataPostingService extends Service {
                 if(Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
                         ""+timestamp)){
                     Log.i("Insertion","Success");}
+
+
+                boolean status =Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
+                        ""+timestamp);
+
+                Log.i("Status of Datbase",""+status);
+
+
 
                 ArrayList<String> result=Data.getInstance().fetchData2();
 
@@ -112,14 +121,14 @@ public class UnboundDataPostingService extends Service {
             }
 
         };
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission
-                .ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
 
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission
+                .ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
             locationManager.requestLocationUpdates(LocationManager.
                     GPS_PROVIDER, GPS_TIME_INTERVAL, GPS_DISTANCE, locationListener);
 
-
-
+        UploadDBTask task=new UploadDBTask(this);
+        task.execute();
     }
 
     public String[] extractRawCoordinates(Location location){

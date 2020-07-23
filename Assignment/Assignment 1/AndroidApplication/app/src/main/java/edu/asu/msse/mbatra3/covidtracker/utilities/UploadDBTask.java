@@ -2,12 +2,10 @@ package edu.asu.msse.mbatra3.covidtracker.utilities;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -17,11 +15,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class UploadTask extends AsyncTask<String, String, String> {
+import edu.asu.msse.mbatra3.covidtracker.Model.Data;
+import edu.asu.msse.mbatra3.covidtracker.R;
+
+public class UploadDBTask extends AsyncTask<String, String, String> {
 
 
-   Context context;
-   public  UploadTask(Context context){
+    Context context;
+    public  UploadDBTask(Context context){
         this.context=context;
     }
 
@@ -39,7 +40,8 @@ public class UploadTask extends AsyncTask<String, String, String> {
 //            File videoFile = new File(Environment.getExternalStorageDirectory()+"/my_folder/Action1.mp4");
 
             // Create function  in chat helper class and it will return the file object over here
-            File videoFile = new File(context.getFilesDir().getPath()+"/Chat/ChatFile.txt");
+            File videoFile = new File(context.getFilesDir().getPath()+ Data.getInstance()
+                    .getDbName()+".db");
             String boundary = Long.toHexString(System.currentTimeMillis()); // Just generate some unique random value.
             String CRLF = "\r\n"; // Line separator required by multipart/form-data.
 
@@ -116,7 +118,7 @@ public class UploadTask extends AsyncTask<String, String, String> {
 
             // Request is lazily fired whenever you need to obtain information about response.
             int responseCode = ((HttpURLConnection) connection).getResponseCode();
-            Log.i("Response code for chat file",""+responseCode); // Should be 200
+            Log.i("Response code for DB file",""+responseCode); // Should be 200
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -125,11 +127,4 @@ public class UploadTask extends AsyncTask<String, String, String> {
         return null;
     }
 
-
-    @Override
-    protected void onProgressUpdate(String... text) {
-//        Toast.makeText(getApplicationContext(), "In Background Task " + text[0], Toast.LENGTH_LONG).show();
-    }
-
 }
-

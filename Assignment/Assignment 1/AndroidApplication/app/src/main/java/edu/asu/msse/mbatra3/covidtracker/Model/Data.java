@@ -75,6 +75,7 @@ public class Data {
                         "(XCOORDINATE,YCOORDINATE,TIMESTAMP) VALUES ('" + x + "','" + y + "','"
                         + timeStamp + "')";
                 db.execSQL(sql);
+                Log.i("Data insertion","Success");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -108,7 +109,7 @@ public class Data {
          //   result=c.getString(xIndex)+" "+c.getString(yIndex);
             results.add(c.getString(xIndex)
                     +"&&"+c.getString(yIndex));
-            Log.i("internal Results",results.get(j));
+            Log.i("Database Results",results.get(j));
             c.moveToNext();
             j++;
         }
@@ -145,7 +146,7 @@ public class Data {
             //   result=c.getString(xIndex)+" "+c.getString(yIndex);
             results.add(c.getString(xIndex)
                     +"&&"+c.getString(yIndex));
-            Log.i("internal Results",results.get(j));
+            Log.i("Database Results",results.get(j));
             c.moveToNext();
             j++;
         }

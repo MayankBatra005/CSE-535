@@ -59,11 +59,11 @@ public class LocationScreen extends AppCompatActivity {
             public void onLocationChanged(Location location) {
 
                 Log.i("Location", location.toString());
-//                String[] coordinates=extractRawCoordinates(location);
-//                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-//                if(Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
-//                        ""+timestamp)){
-//                    Log.i("Insertion","Success");}
+                String[] coordinates=extractRawCoordinates(location);
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                if(Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
+                        ""+timestamp)){
+                    Log.i("Insertion","Success");}
 //
 //                ArrayList<String> result=Data.getInstance().fetchData2();
 //
@@ -122,20 +122,18 @@ public class LocationScreen extends AppCompatActivity {
         }
 
     }
-//    public void test(Location location){
-////        Toast.makeText(this,location.toString(),Toast.LENGTH_SHORT).show();
-//    }
 
-//    public String[] extractRawCoordinates(Location location){
-//        String[] coordinates=new String[2];
-//        TextView textView3=findViewById(R.id.textView3);
-//        textView3.setText(location.toString());
-//        coordinates[0]=""+location.getLongitude();
-//        coordinates[1]=""+location.getLatitude();
-//        Toast.makeText(this,"xcordinate: "+ coordinates[0]+" & "+"ycoordinate: "+
-//                coordinates[1],Toast.LENGTH_SHORT).show();
-//        return coordinates;
-//    }
+
+    public String[] extractRawCoordinates(Location location){
+            String[] coordinates=new String[2];
+            TextView textView3=findViewById(R.id.textView3);
+            textView3.setText(location.toString());
+            coordinates[0]=""+location.getLongitude();
+            coordinates[1]=""+location.getLatitude();
+            Log.i("xcoordinate: ",coordinates[0]);
+            Log.i("ycoordinate: ",coordinates[1]);
+            return coordinates;
+    }
 
     public void startService(View view){
         Intent service=new Intent(this, UnboundDataPostingService.class);
