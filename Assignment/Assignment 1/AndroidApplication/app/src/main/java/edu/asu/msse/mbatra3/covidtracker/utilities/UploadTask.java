@@ -80,8 +80,9 @@ public class UploadTask extends AsyncTask<String, String, String> {
                 writer.append("--" + boundary).append(CRLF);
                 writer.append("Content-Disposition: form-data; name=\"uploaded_file\"; filename=\"" + videoFile.getName() + "\"").append(CRLF);
 //                writer.append("Content-Type: video/mp4; charset=" + charset).append(CRLF); // Text file itself must be saved in this charset!
+
                 // changing for sqlite DB
-                writer.append("Content-Type: sqlite/db; charset=" + charset).append(CRLF); // Text file itself must be saved in this charset!
+                writer.append("Content-Type: multipart/form-data; charset=" + charset).append(CRLF); // Text file itself must be saved in this charset!
                 writer.append(CRLF).flush();
                 FileInputStream vf = new FileInputStream(videoFile);
                 try {
