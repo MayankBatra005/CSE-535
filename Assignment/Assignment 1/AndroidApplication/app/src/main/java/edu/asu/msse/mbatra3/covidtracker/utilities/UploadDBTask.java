@@ -3,6 +3,7 @@ package edu.asu.msse.mbatra3.covidtracker.utilities;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,8 +41,10 @@ public class UploadDBTask extends AsyncTask<String, String, String> {
 //            File videoFile = new File(Environment.getExternalStorageDirectory()+"/my_folder/Action1.mp4");
 
             // Create function  in chat helper class and it will return the file object over here
-            File videoFile = new File(context.getFilesDir().getPath()+ Data.getInstance()
-                    .getDbName()+".db");
+            String filePath="/data/data/edu.asu.msse.mbatra3.covidtracker/files/"+Data.getInstance()
+                    .getDbName()+".db";
+            File videoFile = new File(filePath);
+            Log.d("File path",filePath);
             String boundary = Long.toHexString(System.currentTimeMillis()); // Just generate some unique random value.
             String CRLF = "\r\n"; // Line separator required by multipart/form-data.
 
@@ -80,7 +83,8 @@ public class UploadDBTask extends AsyncTask<String, String, String> {
 //                writer.append("Content-Type: video/mp4; charset=" + charset).append(CRLF); // Text file itself must be saved in this charset!
 
                 // changing for sqlite DB
-                writer.append("Content-Type: multipart/form-data; charset=" + charset).append(CRLF); // Text file itself must be saved in this charset!
+//                writer.append("Content-Type: multipart/form-data; charset=" + charset).append(CRLF); // Text file itself must be saved in this charset!
+                writer.append("Content-Type: application/x-sqlite3; charset=" + charset).append(CRLF); // Text file itself must be saved in this charset!
                 writer.append(CRLF).flush();
                 FileInputStream vf = new FileInputStream(videoFile);
                 try {
