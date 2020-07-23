@@ -3,6 +3,7 @@ package edu.asu.msse.mbatra3.covidtracker.utilities;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,17 +17,17 @@ public class UnboundDataPostingService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
+        Log.i("On Start", "Service Started");
         return super.onStartCommand(intent, flags, startId);
     }
     @Override
     public void onCreate() {
-        Toast.makeText(this, "Service Created", Toast.LENGTH_LONG).show();
+        Log.i("On Create", "Service Created");
     }
 
     @Override
     public void onDestroy() {
-        Toast.makeText(this, "Service Stopped", Toast.LENGTH_LONG).show();
+        Log.i("On Destroy", "Service Destroyed");
     }
 
 
