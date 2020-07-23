@@ -14,7 +14,6 @@
         android:layout_height="100dp"
         android:background="@drawable/chat"
         android:onClick="moveToChatScreen"
-        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,6 +25,7 @@
         android:layout_alignParentEnd="true"
         android:text="Click the icon to talk to a doctor "
         app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/moveToChatScreen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:textColor="@color/white"
         android:text="Click the icon to provide location consent after talking to a doctor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/moveToChatScreen"
