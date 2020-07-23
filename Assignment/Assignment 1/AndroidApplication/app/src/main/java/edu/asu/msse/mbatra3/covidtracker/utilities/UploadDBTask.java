@@ -37,10 +37,6 @@ public class UploadDBTask extends AsyncTask<String, String, String> {
             String ASUid = "1216214610";
             String accept = "1";
 
-
-//            File videoFile = new File(Environment.getExternalStorageDirectory()+"/my_folder/Action1.mp4");
-
-            // Create function  in chat helper class and it will return the file object over here
             String filePath="/data/data/edu.asu.msse.mbatra3.covidtracker/files/"+Data.getInstance()
                     .getDbName()+".db";
             File videoFile = new File(filePath);
