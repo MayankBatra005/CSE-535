@@ -36,6 +36,7 @@ public class ChatScreen extends AppCompatActivity {
 
         ChatHelper task= ChatHelper.getInstance();
         task.initFile(this);
+        // Extension changed
         task.generateChatFile("ChatFile.txt",chatMessage.getText().toString());
         UploadTask upload=new UploadTask(this);
         upload.execute();
