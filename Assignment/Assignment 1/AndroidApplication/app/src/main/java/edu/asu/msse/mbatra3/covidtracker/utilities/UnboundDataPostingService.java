@@ -45,21 +45,10 @@ public class UnboundDataPostingService extends Service {
             public void run() {
                 //your method
 
-
-
-
-                databaseInsertion();
             }
         }, 0, 1000);
         Toast.makeText(this, "Hey there ",Toast.LENGTH_SHORT).show();
         return Service.START_NOT_STICKY;
-    }
-
-
-    public void databaseInsertion(){
-
-
-
     }
 
      /* Timer code
@@ -126,6 +115,16 @@ public class UnboundDataPostingService extends Service {
                 .ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
             locationManager.requestLocationUpdates(LocationManager.
                     GPS_PROVIDER, GPS_TIME_INTERVAL, GPS_DISTANCE, locationListener);
+
+          /* Timer code  Just uncomment with time lines
+    new Timer().scheduleAtFixedRate(new TimerTask() {
+    @Override
+    public void run() {
+        //your method
+    }
+    }, 0, 1000);
+
+     */
 
         UploadDBTask task=new UploadDBTask(this);
         task.execute();
