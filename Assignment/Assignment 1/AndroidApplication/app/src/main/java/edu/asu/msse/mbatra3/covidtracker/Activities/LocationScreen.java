@@ -1,6 +1,7 @@
 package edu.asu.msse.mbatra3.covidtracker.Activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.sql.Timestamp;
@@ -19,6 +21,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import edu.asu.msse.mbatra3.covidtracker.Model.Data;
 import edu.asu.msse.mbatra3.covidtracker.R;
+import edu.asu.msse.mbatra3.covidtracker.utilities.UnboundDataPostingService;
 
 public class LocationScreen extends AppCompatActivity {
     LocationManager locationManager;
@@ -54,17 +57,17 @@ public class LocationScreen extends AppCompatActivity {
 
             @Override
             public void onLocationChanged(Location location) {
-               test(location);
+
                 Log.i("Location", location.toString());
-                String[] coordinates=extractRawCoordinates(location);
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                if(Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
-                        ""+timestamp)){
-                    Log.i("Insertion","Success");}
-
-                ArrayList<String> result=Data.getInstance().fetchData2();
-
-
+//                String[] coordinates=extractRawCoordinates(location);
+//                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//                if(Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
+//                        ""+timestamp)){
+//                    Log.i("Insertion","Success");}
+//
+//                ArrayList<String> result=Data.getInstance().fetchData2();
+//
+//
             }
 
             @Override
@@ -119,19 +122,24 @@ public class LocationScreen extends AppCompatActivity {
         }
 
     }
-    public void test(Location location){
-//        Toast.makeText(this,location.toString(),Toast.LENGTH_SHORT).show();
-    }
+//    public void test(Location location){
+////        Toast.makeText(this,location.toString(),Toast.LENGTH_SHORT).show();
+//    }
 
-    public String[] extractRawCoordinates(Location location){
-        String[] coordinates=new String[2];
-        TextView textView3=findViewById(R.id.textView3);
-        textView3.setText(location.toString());
-        coordinates[0]=""+location.getLongitude();
-        coordinates[1]=""+location.getLatitude();
-        Toast.makeText(this,"xcordinate: "+ coordinates[0]+" & "+"ycoordinate: "+
-                coordinates[1],Toast.LENGTH_SHORT).show();
-        return coordinates;
+//    public String[] extractRawCoordinates(Location location){
+//        String[] coordinates=new String[2];
+//        TextView textView3=findViewById(R.id.textView3);
+//        textView3.setText(location.toString());
+//        coordinates[0]=""+location.getLongitude();
+//        coordinates[1]=""+location.getLatitude();
+//        Toast.makeText(this,"xcordinate: "+ coordinates[0]+" & "+"ycoordinate: "+
+//                coordinates[1],Toast.LENGTH_SHORT).show();
+//        return coordinates;
+//    }
+
+    public void startService(View view){
+        Intent service=new Intent(this, UnboundDataPostingService.class);
+        startService(service);
     }
 
 }

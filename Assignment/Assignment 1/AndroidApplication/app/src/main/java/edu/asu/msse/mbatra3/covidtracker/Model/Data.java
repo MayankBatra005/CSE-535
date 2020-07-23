@@ -52,7 +52,7 @@ public class Data {
                     "YCOORDINATE VARCHAR, TIMESTAMP VARCHAR,id INTEGER PRIMARY KEY)";
             db.execSQL(sql);
            boolean status=true;
-           Log.i("Status",""+status);
+//           Log.i("DB init status",""+status);
             return true;
 
         }

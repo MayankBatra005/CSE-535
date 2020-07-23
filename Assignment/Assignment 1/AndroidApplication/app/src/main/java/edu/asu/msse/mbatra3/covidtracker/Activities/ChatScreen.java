@@ -25,7 +25,7 @@ public class ChatScreen extends AppCompatActivity {
     public void updateChatWindow(View v) {
         EditText chatMessage=findViewById(R.id.chatMessage);
         TextView chatWindow=findViewById(R.id.chatWindow);
-        chatWindow.setText("Chat updated "+chatMessage.getText());
+        chatWindow.setText(""+chatMessage.getText());
         // chatMessage.setText(" ");
         // Check if text file is created or not
         // if not created then create one
@@ -50,8 +50,8 @@ public class ChatScreen extends AppCompatActivity {
 //
 //        }    Log.i("Result from ASU server",result);
 //
-//        Intent location=new Intent(this,LocationScreen.class);
-//        startActivity(location);
+        Intent location=new Intent(this,LocationScreen.class);
+        startActivity(location);
 
     }
 

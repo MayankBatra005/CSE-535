@@ -31,17 +31,5 @@ public class HomeScreen extends AppCompatActivity {
     startActivity(chatScreen);
     }
 
-    public void activateService(View view)throws  Exception{
-        // Starting the service
-            Intent intent = new Intent(HomeScreen.this, UnboundDataPostingService.class);
-            startService(intent);
-
-//        Intent int1 = new Intent(MainActivity.this, MyServiceExTuesday.class);
-//        startService(int1);
-         //   Thread.sleep(5000);
-        // Stopping the service after 5 seconds
-        // stopService(intent);
-
-    }
 
 }

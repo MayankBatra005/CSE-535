@@ -19,12 +19,8 @@ import java.net.URLConnection;
 
 public class UploadTask extends AsyncTask<String, String, String> {
 
-//    public File getChatFile(Context context){
-//
-//        return new File(context.getFilesDir().getPath()+"/Chat/ChatFile.txt");
-//    }
 
-    Context context;
+   Context context;
    public  UploadTask(Context context){
         this.context=context;
     }
