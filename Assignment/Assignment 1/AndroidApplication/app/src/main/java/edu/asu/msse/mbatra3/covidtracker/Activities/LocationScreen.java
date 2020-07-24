@@ -13,9 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -25,7 +23,7 @@ import edu.asu.msse.mbatra3.covidtracker.utilities.UnboundDataPostingService;
 
 public class LocationScreen extends AppCompatActivity {
     LocationManager locationManager;
-    private static final int GPS_TIME_INTERVAL = 300000;    // 5 minutes in milli seconds
+    private static final int GPS_TIME_INTERVAL = 0;    //Change 5 minutes in milli seconds
     private static final int GPS_DISTANCE= 0;
     LocationListener locationListener;
 
@@ -68,10 +66,6 @@ public class LocationScreen extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-//
-//                ArrayList<String> result=Data.getInstance().fetchData2();
-//
-//
             }
 
             @Override
@@ -88,12 +82,7 @@ public class LocationScreen extends AppCompatActivity {
             public void onProviderDisabled(String s) {
 
             }
-
         };
-
-
-
-        // If device is running SDK < 23
 
         if (Build.VERSION.SDK_INT < 23) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.
@@ -107,16 +96,10 @@ public class LocationScreen extends AppCompatActivity {
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.
                     ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-                // ask for permission
-
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.
                         ACCESS_FINE_LOCATION}, 1);
 
-
             } else {
-
-                // we have permission!
 
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
                         0, locationListener);

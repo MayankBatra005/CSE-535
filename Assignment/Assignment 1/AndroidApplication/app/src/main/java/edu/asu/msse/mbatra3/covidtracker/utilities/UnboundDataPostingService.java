@@ -10,23 +10,17 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import edu.asu.msse.mbatra3.covidtracker.Activities.LocationScreen;
 import edu.asu.msse.mbatra3.covidtracker.Model.Data;
 
 public class UnboundDataPostingService extends Service {
     LocationManager locationManager;
-    private static final int GPS_TIME_INTERVAL = 300000;    // 5 minutes in milli seconds
+    private static final int GPS_TIME_INTERVAL = 0;    // 5 minutes in milli seconds
     private static final int GPS_DISTANCE= 0;
     LocationListener locationListener;
     public UnboundDataPostingService(){}
@@ -39,7 +33,6 @@ public class UnboundDataPostingService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i("On Start", "Service Started");
-//        return super.onStartCommand(intent, flags, startId);
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -47,7 +40,6 @@ public class UnboundDataPostingService extends Service {
 
             }
         }, 0, 1000);
-        Toast.makeText(this, "Hey there ",Toast.LENGTH_SHORT).show();
         return Service.START_NOT_STICKY;
     }
 
@@ -60,47 +52,32 @@ public class UnboundDataPostingService extends Service {
 }, 0, 1000);
 
      */
-
-
-
-
     @Override
     public void onCreate() {
         Log.i("On Create", "Service Created");
         locationManager = (LocationManager) this.getSystemService(this.LOCATION_SERVICE);
-
         locationListener = new LocationListener() {
-
-            @Override
-            public void onLocationChanged(Location location) {
-
-                Log.i("Location", location.toString());
-                String[] coordinates=extractRawCoordinates(location);
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                try {
-                    if(Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
-                            ""+timestamp)){
-                        Log.i("Insertion","Success");}
-                } catch (Exception e) {
+        @Override
+        public void onLocationChanged(Location location) {
+         Log.i("Location", location.toString());
+         String[] coordinates=extractRawCoordinates(location);
+         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+         try {
+            if(Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
+                  ""+timestamp)){
+                  Log.i("Insertion","Success");}
+            } catch (Exception e) {
+                  e.printStackTrace();
+            }
+         boolean status = false;
+           try {
+           status = Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
+                         ""+timestamp);
+              } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
-                boolean status = false;
-                try {
-                    status = Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
-                            ""+timestamp);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
                 Log.i("Status of Datbase",""+status);
-
-
-
                 ArrayList<String> result=Data.getInstance().fetchData2();
-
-
             }
 
             @Override

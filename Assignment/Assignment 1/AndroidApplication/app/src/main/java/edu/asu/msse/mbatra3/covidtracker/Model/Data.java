@@ -3,17 +3,14 @@ package edu.asu.msse.mbatra3.covidtracker.Model;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Base64;
 import android.util.Log;
-
 import java.util.ArrayList;
-
+import edu.asu.msse.mbatra3.covidtracker.R;
 import edu.asu.msse.mbatra3.covidtracker.utilities.EnCryptor;
 
 public class Data {
     String dbName;
     SQLiteDatabase db=null;
-//    private static String DB_PATH = Context.getFilesDir().getPath();
 
     public SQLiteDatabase getDb() {
         return db;
@@ -21,7 +18,7 @@ public class Data {
 
     public static Data object;
     private EnCryptor encryptor;
-    private static final String SAMPLE_ALIAS = ""+Data.getInstance().getDbName();
+    private static String SAMPLE_ALIAS ;
 
     private Data()
     {
@@ -40,15 +37,13 @@ public class Data {
     }
 
     public void setDbName(Context context,String dbName) {
-       // this.dbName = context.getFilesDir().getPath()+"/"+dbName+".db";
         this.dbName=dbName;
         Log.i("dbname",this.dbName);
     }
 
-    // dbname and table name are same
     public boolean initDB(Context context)
         {
-        // Add primary key and unique sr no auto increment
+            SAMPLE_ALIAS=context.getString(R.string.passwd);
        try{
             db=context.openOrCreateDatabase(context.getFilesDir().getPath()+"/"+dbName+".db",
                     context.MODE_PRIVATE,null);
@@ -56,10 +51,7 @@ public class Data {
                     "( XCOORDINATE VARCHAR," +
                     "YCOORDINATE VARCHAR, TIMESTAMP VARCHAR,id INTEGER PRIMARY KEY)";
             db.execSQL(sql);
-           boolean status=true;
-//           Log.i("DB init status",""+status);
             return true;
-
         }
         catch (Exception E)
         {
@@ -71,26 +63,16 @@ public class Data {
     public boolean insertData(String xCordinate,String yCordinate,String timeStamp) throws Exception
     {
         String x,y;
-//        try {
-//            final byte[] encryptedText = encryptor
-//                    .encryptText(SAMPLE_ALIAS, edTextToEncrypt.getText().toString());
-//            tvEncryptedText.setText(Base64.encodeToString(encryptedText, Base64.DEFAULT));
-//        }  catch (Exception e) {
-//            e.printStackTrace();
-//        }
         final byte[] encryptedTextX,encryptedTextY;
-
-
-            encryptor = new EnCryptor();
-             encryptedTextX = encryptor
+        encryptor = new EnCryptor();
+        encryptedTextX = encryptor
                     .encryptText(SAMPLE_ALIAS, xCordinate);
-             x=encryptedTextX.toString();
-             encryptedTextY = encryptor
+        x=encryptedTextX.toString();
+        encryptedTextY = encryptor
                     .encryptText(SAMPLE_ALIAS, xCordinate);
-            y=encryptedTextY.toString();
-            Log.i("X encrypted is ",x);
-            Log.i("Y encrypted is ",y);
-
+        y=encryptedTextY.toString();
+        Log.i("X encrypted is ",x);
+        Log.i("Y encrypted is ",y);
 
         if(db==null)
         {
@@ -133,7 +115,6 @@ public class Data {
         int j=0;
         while(j<counting)
         {
-         //   result=c.getString(xIndex)+" "+c.getString(yIndex);
             results.add(c.getString(xIndex)
                     +"&&"+c.getString(yIndex));
             Log.i("Database Results",results.get(j));
@@ -170,8 +151,7 @@ public class Data {
         int j=0;
         while(j<counting)
         {
-            //   result=c.getString(xIndex)+" "+c.getString(yIndex);
-            results.add(c.getString(xIndex)
+          results.add(c.getString(xIndex)
                     +"&&"+c.getString(yIndex));
             Log.i("Database Results",results.get(j));
             c.moveToNext();
