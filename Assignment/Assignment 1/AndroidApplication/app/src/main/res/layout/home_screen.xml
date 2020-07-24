@@ -33,28 +33,28 @@
 
 
 
-    <Button
-        android:id="@+id/locationConsent"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:background="@drawable/consent_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/moveToChatScreen"
-        app:layout_constraintVertical_bias="0.805" />
+<!--    <Button-->
+<!--        android:id="@+id/locationConsent"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:background="@drawable/consent_icon"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="1.0"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/textView2"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/moveToChatScreen"-->
+<!--        app:layout_constraintVertical_bias="0.805" />-->
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:textColor="@color/white"
-        android:text="Click the icon to provide location consent after talking to a doctor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/moveToChatScreen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+<!--    <TextView-->
+<!--        android:id="@+id/textView2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:text="Click the icon to provide location consent after talking to a doctor"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/moveToChatScreen"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/textView" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -15,15 +15,15 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen);
 
-        Button bt1 = (Button) findViewById(R.id.locationConsent);
-
-        bt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeScreen.this, UnboundDataPostingService.class);
-                startService(intent);
-            }
-        });
+//        Button bt1 = (Button) findViewById(R.id.locationConsent);
+//
+//        bt1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(HomeScreen.this, UnboundDataPostingService.class);
+//                startService(intent);
+//            }
+//        });
 
     }
     public void moveToChatScreen(View v){
