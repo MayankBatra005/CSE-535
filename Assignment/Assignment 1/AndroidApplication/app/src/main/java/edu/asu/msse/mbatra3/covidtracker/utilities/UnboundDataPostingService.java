@@ -77,13 +77,22 @@ public class UnboundDataPostingService extends Service {
                 Log.i("Location", location.toString());
                 String[] coordinates=extractRawCoordinates(location);
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                if(Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
-                        ""+timestamp)){
-                    Log.i("Insertion","Success");}
+                try {
+                    if(Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
+                            ""+timestamp)){
+                        Log.i("Insertion","Success");}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
 
-                boolean status =Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
-                        ""+timestamp);
+                boolean status = false;
+                try {
+                    status = Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
+                            ""+timestamp);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 Log.i("Status of Datbase",""+status);
 

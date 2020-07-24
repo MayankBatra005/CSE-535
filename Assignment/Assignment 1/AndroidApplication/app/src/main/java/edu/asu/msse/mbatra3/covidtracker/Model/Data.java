@@ -3,9 +3,12 @@ package edu.asu.msse.mbatra3.covidtracker.Model;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Base64;
 import android.util.Log;
 
 import java.util.ArrayList;
+
+import edu.asu.msse.mbatra3.covidtracker.utilities.EnCryptor;
 
 public class Data {
     String dbName;
@@ -17,6 +20,8 @@ public class Data {
     }
 
     public static Data object;
+    private EnCryptor encryptor;
+    private static final String SAMPLE_ALIAS = ""+Data.getInstance().getDbName();
 
     private Data()
     {
@@ -63,8 +68,30 @@ public class Data {
         return false;
     }
 
-    public boolean insertData(String x,String y,String timeStamp)
+    public boolean insertData(String xCordinate,String yCordinate,String timeStamp) throws Exception
     {
+        String x,y;
+//        try {
+//            final byte[] encryptedText = encryptor
+//                    .encryptText(SAMPLE_ALIAS, edTextToEncrypt.getText().toString());
+//            tvEncryptedText.setText(Base64.encodeToString(encryptedText, Base64.DEFAULT));
+//        }  catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        final byte[] encryptedTextX,encryptedTextY;
+
+
+            encryptor = new EnCryptor();
+             encryptedTextX = encryptor
+                    .encryptText(SAMPLE_ALIAS, xCordinate);
+             x=encryptedTextX.toString();
+             encryptedTextY = encryptor
+                    .encryptText(SAMPLE_ALIAS, xCordinate);
+            y=encryptedTextY.toString();
+            Log.i("X encrypted is ",x);
+            Log.i("Y encrypted is ",y);
+
+
         if(db==null)
         {
             return false;

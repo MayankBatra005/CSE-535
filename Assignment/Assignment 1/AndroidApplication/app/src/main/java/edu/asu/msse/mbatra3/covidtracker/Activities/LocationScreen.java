@@ -61,9 +61,13 @@ public class LocationScreen extends AppCompatActivity {
                 Log.i("Location", location.toString());
                 String[] coordinates=extractRawCoordinates(location);
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                if(Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
-                        ""+timestamp)){
-                    Log.i("Insertion","Success");}
+                try {
+                    if(Data.getInstance().insertData(""+coordinates[0],""+coordinates[1],
+                            ""+timestamp)){
+                        Log.i("Insertion","Success");}
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 //
 //                ArrayList<String> result=Data.getInstance().fetchData2();
 //
