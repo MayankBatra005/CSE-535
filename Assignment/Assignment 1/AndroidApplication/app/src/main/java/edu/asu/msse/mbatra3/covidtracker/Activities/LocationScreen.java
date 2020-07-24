@@ -23,7 +23,7 @@ import edu.asu.msse.mbatra3.covidtracker.utilities.UnboundDataPostingService;
 
 public class LocationScreen extends AppCompatActivity {
     LocationManager locationManager;
-    private static final int GPS_TIME_INTERVAL = 0;    //Change 5 minutes in milli seconds
+    private static final int GPS_TIME_INTERVAL = 900000;    //Change 15 minutes in milli seconds
     private static final int GPS_DISTANCE= 0;
     LocationListener locationListener;
 

@@ -20,7 +20,7 @@ import edu.asu.msse.mbatra3.covidtracker.Model.Data;
 
 public class UnboundDataPostingService extends Service {
     LocationManager locationManager;
-    private static final int GPS_TIME_INTERVAL = 0;    // 5 minutes in milli seconds
+    private static final int GPS_TIME_INTERVAL = 900000;    // 15 minutes in milli seconds
     private static final int GPS_DISTANCE= 0;
     LocationListener locationListener;
     public UnboundDataPostingService(){}
