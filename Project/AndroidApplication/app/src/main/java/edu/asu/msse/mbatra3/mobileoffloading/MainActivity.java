@@ -22,7 +22,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.os.StrictMode;
-import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,6 +33,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import edu.asu.msse.mbatra3.mobileoffloading.Model.DataHelper;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
     ServerClass serverClass;
     ClientClass clientClass;
-    SendReceive sendReceive;
+    public SendReceive sendReceive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                                 data = (new StringBuilder()).append(addresses.get(0).getLatitude()).append("\n").append(addresses.get(0).getLongitude()).append("\n").toString();
                                 slaveInformationMap.put("lattitude", addresses.get(0).getLatitude() + "");
                                 slaveInformationMap.put("longitude", addresses.get(0).getLongitude() + "");
-                                saveToTxt(data);
+                                DataHelper.createNotes(data,getApplicationContext());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -220,17 +220,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void saveToTxt(String content) {
-        try {
-            File path = getExternalFilesDir(null);
-            File file = new File(path, "Location.txt");
-            FileWriter writer = new FileWriter(file);
-            writer.append(content);
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-        }
-    }
+//    private void saveToTxt(String content) {
+//        try {
+//            File path = getExternalFilesDir(null);
+//            File file = new File(path, "Location.txt");
+//            FileWriter writer = new FileWriter(file);
+//            writer.append(content);
+//            writer.flush();
+//            writer.close();
+//        } catch (IOException e) {
+//        }
+//    }
 
     private void callListener() {
 
@@ -355,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
         manager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
         assert manager != null;
         channel = manager.initialize(this, getMainLooper(), null);
-        receiver = new WiFiDirectBroadcastReceiver(manager, channel, this);
+        receiver = new NetworkRecver(manager, channel, this);
 
         //Create an intent filter and add the same intents that your broadcast receiver checks for
         intentFilter = new IntentFilter();
@@ -894,7 +894,7 @@ public class MainActivity extends AppCompatActivity {
      *     the offloading process.
      */
     public void navigateResultScreen(String row1, String row2, String row3, String row4, String estimation1, String estimation2 ){
-        Intent intent = new Intent(MainActivity.this, ComputeActivity.class);
+        Intent intent = new Intent(MainActivity.this, OffloadCalculations.class);
         intent.putExtra("row1", row1);
         intent.putExtra("row2", row2);
         intent.putExtra("row3", row3);
