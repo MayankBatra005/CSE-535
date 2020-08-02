@@ -1,27 +1,16 @@
 package edu.asu.msse.mbatra3.covidtracker.utilities;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class ChatHelper{
-//        extends AsyncTask<String, String, String> {
-//    @Override
-//    protected String doInBackground(String... strings) {
-//        Log.i("ASU Impact LAb", strings[0]);
-//        return "Done";
-//    }
 
     File root;
     public static ChatHelper object;
-    private ChatHelper(){
-
-    }
+    private ChatHelper(){ }
 
     public static ChatHelper getInstance(){
         if(object==null){
@@ -35,7 +24,6 @@ public class ChatHelper{
         if (!root.exists()) {
             root.mkdirs();
         }
-
     }
 
     public File getFile(){
@@ -44,7 +32,6 @@ public class ChatHelper{
 
     public void generateChatFile(String sFileName, String sBody) {
         try {
-
             File gpxfile = new File(getFile(), sFileName);
             FileWriter writer = new FileWriter(gpxfile);
             Log.i("Chat Body",sBody);
@@ -56,6 +43,4 @@ public class ChatHelper{
             e.printStackTrace();
         }
     }
-
-
 }

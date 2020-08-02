@@ -13,27 +13,28 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import edu.asu.msse.mbatra3.covidtracker.Model.Data;
 
-public class UploadTask extends AsyncTask<String, String, String> {
-
-
-   Context context;
-   public  UploadTask(Context context){
+public class UploadDBTask extends AsyncTask<String, String, String> {
+    Context context;
+    public  UploadDBTask(Context context){
         this.context=context;
     }
 
     @Override
     protected String doInBackground(String... strings) {
         try {
-
             String url = "http://10.218.107.121/cse535/upload_video.php";
             String charset = "UTF-8";
             String group_id = "4";
             String ASUid = "1216214610";
             String accept = "1";
-            File videoFile = new File(context.getFilesDir().getPath()+"/Chat/ChatFile.txt");
-            String boundary = Long.toHexString(System.currentTimeMillis()); // Just generate some unique random value.
-            String CRLF = "\r\n"; // Line separator required by multipart/form-data.
+            String filePath="/data/data/edu.asu.msse.mbatra3.covidtracker/files/"+Data.getInstance()
+                    .getDbName()+".db";
+            File videoFile = new File(filePath);
+            Log.d("File path",filePath);
+            String boundary = Long.toHexString(System.currentTimeMillis());
+            String CRLF = "\r\n";
             URLConnection connection;
             connection = new URL(url).openConnection();
             connection.setDoOutput(true);
@@ -56,8 +57,8 @@ public class UploadTask extends AsyncTask<String, String, String> {
                 writer.append(CRLF).append(group_id).append(CRLF).flush();
                 writer.append("--" + boundary).append(CRLF);
                 writer.append("Content-Disposition: form-data; name=\"uploaded_file\"; filename=\"" + videoFile.getName() + "\"").append(CRLF);
-                // changing for chat file
-                writer.append("Content-Type: multipart/form-data; charset=" + charset).append(CRLF); // Text file itself must be saved in this charset!
+                // changing for sqlite DB
+                writer.append("Content-Type: application/x-sqlite3; charset=" + charset).append(CRLF); // Text file itself must be saved in this charset!
                 writer.append(CRLF).flush();
                 FileInputStream vf = new FileInputStream(videoFile);
                 try {
@@ -66,6 +67,7 @@ public class UploadTask extends AsyncTask<String, String, String> {
                     while ((bytesRead = vf.read(buffer, 0, buffer.length)) >= 0)
                     {
                         output.write(buffer, 0, bytesRead);
+
                     }
                 }catch (Exception exception)
                 {
@@ -81,17 +83,12 @@ public class UploadTask extends AsyncTask<String, String, String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            // Request is lazily fired whenever you need to obtain information about response.
             int responseCode = ((HttpURLConnection) connection).getResponseCode();
-            Log.i("Response code for chat file",""+responseCode); // Should be 200
+            Log.i("Response code for DB file",""+responseCode); // Should be 200
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return null;
     }
-
-    @Override
-    protected void onProgressUpdate(String... text) {
-    }
 }
-

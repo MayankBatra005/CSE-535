@@ -14,7 +14,9 @@ android:layout_height="match_parent"
     android:gravity="center"
     android:layout_gravity="top"
     android:layout_weight="1"
-    android:hint="@string/chat_window" />
+    android:hint="@string/chat_window"
+    android:textColorHint="@color/white"
+    android:textColor="@color/white"/>
 <TableLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -27,8 +29,9 @@ android:layout_height="match_parent"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:textColorHint="@color/white"
             android:hint="@string/message_hint"
-            android:textColor="@color/materialDarkBlue" />
+            android:textColor="@color/white" />
 
         <Button
             android:layout_width="wrap_content"

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    <color name="colorPrimary">#008577</color>-->
-<!--    <color name="colorPrimaryDark">#00574B</color>-->
-<!--    <color name="colorAccent">#D81B60</color>-->
-
-
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="materialBlue">#63ccff</color>
-    <color name="materialDarkBlue">#006db3</color>
-    <color name="materialPurple">#975eff</color>
+
+
+<!--    <color name="colorPrimary">#008577</color>-->
+<!--    <color name="colorPrimaryDark">#00574B</color>-->
+<!--    <color name="colorAccent">#D81B60</color>-->
+    <color name="materialBlue">	#00FFFF</color>
+    <color name="materialDarkBlue">#000080</color>
+<!--    <color name="materialPurple">#975eff</color>-->
     <color name="white">#ffffff</color>
-    <color name="materialTeal">#62ebff</color>
-    <color name="materialPink">#ff6dff</color>
-    <color name="materialDarkPink">#b0003a</color>
-    <color name="materialDarkTeal">#0088a3</color>
-    <color name="materialLightBlue">#63a4ff</color>
-    <color name="materialDarkBluez">#1976d2</color>
-    <color name="black">#000015</color>
-    <color name="materialYellow">#ffff52</color>
-    <color name="materialMidYellow">#c7a500</color>
-    <color name="materialDarkYellow">#ffd600</color>
+    <color name="materialTeal">#000080</color>
+    <color name="materialPink">#000080</color>
+<!--    <color name="materialDarkPink">#b0003a</color>-->
+    <color name="materialDarkTeal">#000080</color>
+<!--    <color name="materialLightBlue">#63a4ff</color>-->
+<!--    <color name="materialDarkBluez">#1976d2</color>-->
+<!--    <color name="black">#000015</color>-->
+<!--    <color name="materialYellow">#ffff52</color>-->
+<!--    <color name="materialMidYellow">#c7a500</color>-->
+<!--    <color name="materialDarkYellow">#ffd600</color>-->
 </resources>
