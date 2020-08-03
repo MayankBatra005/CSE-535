@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import edu.asu.msse.mbatra3.mobileoffloading.Utlilities.Helper;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -773,7 +774,8 @@ public class MainActivity extends AppCompatActivity {
         long currentT = System.currentTimeMillis();
         computeMatrix();
         est2 = "Estimate Time without Offloading is: " + (System.currentTimeMillis() - currentT + 1) + "ms"; // WRITE ACTUAL MULT HERE
-        navigateResultScreen(row1,row2,row3,row4,est1,est2);
+         // navigateResultScreen(row1,row2,row3,row4,est1,est2);
+        startActivity(new Helper().navigateResultScreen(row1,row2,row3,row4,est1,est2,MainActivity.this));
     }
 
     /**
@@ -886,20 +888,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return outArr;
-    }
-
-    /**
-     * This function navigates to the next screen in the app. It send the output of the output matrix computed using
-     *     the offloading process.
-     */
-    public void navigateResultScreen(String row1, String row2, String row3, String row4, String estimation1, String estimation2 ){
-        Intent intent = new Intent(MainActivity.this, OffloadCalculations.class);
-        intent.putExtra("row1", row1);
-        intent.putExtra("row2", row2);
-        intent.putExtra("row3", row3);
-        intent.putExtra("row4", row4);
-        intent.putExtra("estimation1", estimation1);
-        intent.putExtra("estimation2", estimation2);
-        startActivity(intent);
     }
 }
