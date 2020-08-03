@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                         sendPeriodicResponse();
                     } else {
                         try {
+                            Log.i("Temp Message",tempMsg);
                             initialConnect(tempMsg);
                             // masterCompute();
                         } catch (JSONException e) {
