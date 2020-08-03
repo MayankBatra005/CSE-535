@@ -22,6 +22,7 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.os.StrictMode;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,6 +34,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import edu.asu.msse.mbatra3.mobileoffloading.Model.Data;
+import edu.asu.msse.mbatra3.mobileoffloading.Utlilities.FailureComputation;
 import edu.asu.msse.mbatra3.mobileoffloading.Utlilities.Helper;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -86,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList<String> addressMap = new ArrayList<String>();
     public HashMap<String, Object> sendReceiveRegister = new HashMap<>(); // Used internally
-    public HashMap<String, String> slaveInformationMap = new HashMap<>(); // Used to send so, needs to be String, String
+    // Pick one
+//    public HashMap<String, String> slaveInformationMap = new HashMap<>(); // Used to send so, needs to be String, String
     public HashMap<String, String> batteryLevels = new HashMap<>();
     public String OWNER = "SLAVE";
     public int[][] A1 = new int[4][4];
@@ -107,16 +111,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         read_msg_box = findViewById(R.id.readMsg);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         globalStart-=800;
-
-
-
         initialize();
         callListener();
     }
@@ -166,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             int batteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
 //            battery.setText("Battery Level: " + batteryLevel + "%");
-            slaveInformationMap.put("battery", batteryLevel + "");
+            Data.getInstance().getSlaveInformationMap().put("battery", batteryLevel + "");
         }
     };
 
@@ -187,8 +186,8 @@ public class MainActivity extends AppCompatActivity {
 //                                t1.setText(Html.fromHtml("<b>Latitude : </b>" + addresses.get(0).getLatitude()));
 //                                t2.setText(Html.fromHtml("<b>Longitude : </b>" + addresses.get(0).getLongitude()));
                                 data = (new StringBuilder()).append(addresses.get(0).getLatitude()).append("\n").append(addresses.get(0).getLongitude()).append("\n").toString();
-                                slaveInformationMap.put("lattitude", addresses.get(0).getLatitude() + "");
-                                slaveInformationMap.put("longitude", addresses.get(0).getLongitude() + "");
+                                Data.getInstance().getSlaveInformationMap().put("lattitude", addresses.get(0).getLatitude() + "");
+                                Data.getInstance().getSlaveInformationMap().put("longitude", addresses.get(0).getLongitude() + "");
                                 saveToTxt(data);
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -242,13 +241,13 @@ public class MainActivity extends AppCompatActivity {
                 manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
                     @Override
                     public void onSuccess() {
-                        System.out.println("XY Found");
+                        Log.i("Discovery Started","XY Found");
                         connectionStatus.setText("Discovery Started");
                     }
 
                     @Override
                     public void onFailure(int reason) {
-                        System.out.println("Peer not Found");
+                        Log.i("Discovery Started","Peer not Found");
                         connectionStatus.setText("Discovery Failed");
                     }
                 });
@@ -275,7 +274,8 @@ public class MainActivity extends AppCompatActivity {
                     ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
                 }
 
-                System.out.println("Getting Battery information in btLocation");
+                Log.i("Get info button clicked","Getting Battery information in btLocation");
+                Data.getInstance().viewMapContents();
 
                 //Get Battery details
                 MainActivity.this.registerReceiver(MainActivity.this.batteryInfo, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -302,9 +302,10 @@ public class MainActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JSONObject jsonObj = new JSONObject(slaveInformationMap);
+                JSONObject jsonObj = new JSONObject(Data.getInstance().getSlaveInformationMap());
                 String msgString = jsonObj.toString();
                 String msg = msgString;
+                Data.getInstance().viewMapContents();
                 sendReceive.write(msg.getBytes());
             }
         });
@@ -340,15 +341,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void initialize() {
 
-        btnDiscover = (Button) findViewById(R.id.buttonDiscover);
-        listView = (ListView) findViewById(R.id.peerListView);
-        connectionStatus = (TextView)findViewById(R.id.connectionStatus);
-        btnSend = (Button)findViewById(R.id.sendButton);
-        btnCompute = (Button)findViewById(R.id.btnCompute);
+        btnDiscover = findViewById(R.id.buttonDiscover);
+        listView = findViewById(R.id.peerListView);
+        connectionStatus = findViewById(R.id.connectionStatus);
+        btnSend = findViewById(R.id.sendButton);
+        btnCompute = findViewById(R.id.btnCompute);
         //btnDisconnect = (Button) findViewById(R.id.buttonDisconnect);
-        btLocation = (Button)findViewById(R.id.getButton);
-        matrix1 = (EditText) findViewById(R.id.Matrix1Text);
-        matrix2 = (EditText) findViewById(R.id.Matrix2Text);
+        btLocation = findViewById(R.id.getButton);
+        matrix1 = findViewById(R.id.Matrix1Text);
+        matrix2 = findViewById(R.id.Matrix2Text);
 
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
@@ -682,7 +683,8 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> dataMap = new HashMap<>();
         for (int i = 0; i < iValues.length; i++) {
             for (int j = 0; j < jValues.length; j++) {
-                dataMap.put(iValues[i] + "," + (((int) jValues[j].charAt(0)) - 4 - 48), arrayRCMult(jsonObject.get(iValues[i]) + "", jsonObject.get(jValues[j]) + ""));
+                dataMap.put(iValues[i] + "," + (((int) jValues[j].charAt(0)) - 4 - 48),
+                        arrayRCMult(jsonObject.get(iValues[i]) + "", jsonObject.get(jValues[j]) + ""));
             }
         }
         int time = Integer.parseInt(jsonObject.get("time") + "");
@@ -708,7 +710,8 @@ public class MainActivity extends AppCompatActivity {
         JSONObject jsonObj = new JSONObject(dataMap);
         String returnString = jsonObj.toString();
         String msg = returnString;
-        Toast.makeText(getApplicationContext(), "Slave side computation completed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Slave side computation completed",
+                Toast.LENGTH_SHORT).show();
         sendReceive.write(msg.getBytes());
         try {
             Thread.sleep(50);
@@ -830,7 +833,9 @@ public class MainActivity extends AppCompatActivity {
                 Thread.sleep(50);
                 HashMap<String, Object> deviceMap = (HashMap<String, Object>) sendReceiveRegister.get(String.valueOf(keyList[i]));
                 if(Integer.parseInt(deviceMap.get("battery").toString()) < 20) {
-                    failureRecovery(String.valueOf(keyList[i])); //Perform failure recovery
+                    FailureComputation recovery=new FailureComputation();
+                    recovery.failureRecovery(String.valueOf(keyList[i]),this,new MainActivity()); //Perform failure recovery
+// Test            // failureRecovery(String.valueOf(keyList[i]));
                 }
             }
         }
@@ -867,7 +872,7 @@ public class MainActivity extends AppCompatActivity {
      * */
     public void sendPeriodicResponse() {
         getLocation();
-        JSONObject jsonObj = new JSONObject(slaveInformationMap);
+        JSONObject jsonObj = new JSONObject(Data.getInstance().getSlaveInformationMap());
         String msg = jsonObj.toString();
         sendReceive.write(msg.getBytes());
     }
