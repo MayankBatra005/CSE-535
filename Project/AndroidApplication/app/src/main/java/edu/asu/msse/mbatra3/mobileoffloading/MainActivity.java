@@ -189,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
                                 data = (new StringBuilder()).append(addresses.get(0).getLatitude()).append("\n").append(addresses.get(0).getLongitude()).append("\n").toString();
                                 Data.getInstance().getSlaveInformationMap().put("lattitude", addresses.get(0).getLatitude() + "");
                                 Data.getInstance().getSlaveInformationMap().put("longitude", addresses.get(0).getLongitude() + "");
+                                Data.getInstance().viewMapContents();
                                 saveToTxt(data);
                             } catch (IOException e) {
                                 e.printStackTrace();
