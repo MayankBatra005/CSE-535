@@ -17,4 +17,22 @@ public class Helper {
         intent.putExtra("estimation2", estimation2);
         return intent;
     }
+
+    public int[][] convertStringToArray(String input) {
+        input = input.trim().replaceAll("\\ ", "");
+        input = input+",";
+        int[][] outArr = new int[4][4];
+        int loopI = 0, loopJ = 0;
+        input = input.replaceAll("\\{","");
+        input = input.substring(0,input.length()-2) + ",";
+        String[] items = input.split("\\},");
+        for(int i=0; i<items.length; i++) {
+            String item = items[i] + ",";
+            String[] itemRow = item.split(",");
+            for(int j=0; j<itemRow.length; j++) {
+                outArr[i][j] = Integer.parseInt(itemRow[j].trim() + "");
+            }
+        }
+        return outArr;
+    }
 }
