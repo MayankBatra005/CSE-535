@@ -5,16 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+<!--Orignal code -->
+<!--    <Button-->
+<!--        android:id="@+id/buttonDiscover"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_alignBottom="@+id/connectionStatus"-->
+<!--        android:layout_marginBottom="-45dp"-->
+<!--        android:text="DISCOVER PEERS" />-->
+    <!--E G-->
 
     <Button
         android:id="@+id/buttonDiscover"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignBottom="@+id/connectionStatus"
-        android:layout_marginBottom="-45dp"
-        android:text="DISCOVER PEERS" />
-
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="@android:color/background_dark"
+        android:text="Monitor Slave Devices"
+        android:textColor="@android:color/background_light" />
 
     <!--    <Button-->connectionStatus
     <!--        android:id="@+id/buttonDisconnect"-->
@@ -44,27 +56,55 @@
     <!--        tools:layout_editor_absoluteY="109dp" />-->
 
 
+    <!--Orignal code -->
+<!--    <ListView-->
+<!--        android:id="@+id/peerListView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="150dp"-->
+<!--        android:layout_alignBottom="@+id/buttonDiscover"-->
+<!--        android:layout_marginBottom="-150dp"-->
+<!--        tools:layout_editor_absoluteX="1dp"-->
+<!--        tools:layout_editor_absoluteY="158dp"-->
+<!--        android:background="@android:color/holo_orange_dark"/>-->
+    <!--E G-->
 
     <ListView
         android:id="@+id/peerListView"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_width="236dp"
+        android:layout_height="110dp"
         android:layout_alignBottom="@+id/buttonDiscover"
-        android:layout_marginBottom="-150dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="-136dp"
+        android:background="@color/colorAccent"
+        android:backgroundTint="?attr/colorButtonNormal"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="158dp"
-        android:background="@android:color/holo_orange_dark"/>
+        tools:layout_editor_absoluteY="158dp" />
+
+
+
+    <!--Orignal code -->
+<!--    <TextView-->
+<!--        android:id="@+id/connectionStatus"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Connection Status"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:textAlignment="center"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:textColor="@android:color/holo_blue_dark"/>-->
+    <!--E G-->
 
     <TextView
         android:id="@+id/connectionStatus"
-        android:layout_width="match_parent"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:text="Connection Status"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="24dp"
+        android:text="Connecting..."
         android:textAlignment="center"
-        android:layout_marginTop="15dp"
-        android:textColor="@android:color/holo_blue_dark"/>
-
+        android:textColor="@android:color/holo_green_dark" />
 
     <!--    <Button-->
     <!--        android:id="@+id/bt_battery"-->
@@ -126,26 +166,58 @@
         android:textAlignment="center" />
     -->
 
+<!--    Orignal codeeeeeeeeeeeeeeeeeee-->
+<!--    <Button-->
+<!--        android:id="@+id/getButton"-->
+<!--        android:layout_width="176dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignBottom="@+id/peerListView"-->
+<!--        android:layout_marginBottom="-56dp"-->
+<!--        android:text="GET INFO" />-->
+    <!--E G-->
     <Button
         android:id="@+id/getButton"
-        android:layout_width="176dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/peerListView"
-        android:layout_marginBottom="-56dp"
-        android:text="GET INFO" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="25dp"
+        android:layout_toEndOf="@+id/peerListView"
+        android:backgroundTint="@android:color/background_dark"
+        android:text="GET INFO"
+        android:textColor="@android:color/background_light" />
 
+
+<!--Orignal -->
+<!--    <Button-->
+<!--        android:id="@+id/sendButton"-->
+<!--        android:layout_width="176dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignBottom="@+id/peerListView"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginStart="60dp"-->
+<!--        android:layout_marginEnd="-1dp"-->
+<!--        android:layout_marginBottom="-57dp"-->
+<!--        android:layout_toEndOf="@+id/getButton"-->
+<!--        android:text="SEND INFO" />-->
+<!--E G-->
     <Button
         android:id="@+id/sendButton"
-        android:layout_width="176dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/peerListView"
+        android:layout_width="70dp"
+        android:layout_height="53dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="-1dp"
-        android:layout_marginBottom="-57dp"
-        android:layout_toEndOf="@+id/getButton"
-        android:text="SEND INFO" />
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="146dp"
+        android:layout_marginEnd="25dp"
+        android:layout_toEndOf="@+id/peerListView"
+        android:backgroundTint="@android:color/background_dark"
+        android:text="SEND INFO"
+        android:textColor="@android:color/background_light" />
 
+<!--Orignal -->
     <TextView
         android:id="@+id/readMsg"
         android:layout_width="match_parent"
@@ -206,3 +278,4 @@
 
 
 </RelativeLayout>
+
