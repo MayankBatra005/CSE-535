@@ -598,11 +598,11 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> dataMap = new HashMap<>();
         dataMap.put("index", index + "");
         for (int i = index * 2; i < index * 2 + 4; i++) {
-            dataMap.put(0 + "", arrayToString(A1[0])); // You need to do 0*4, 0,0
-            dataMap.put(1 + "", arrayToString(A1[1])); // You need to do 1*4, 1,0
-            dataMap.put(2 + "", arrayToString(A1[2])); // You need to do 2*4, 2,0
-            dataMap.put(3 + "", arrayToString(A1[3])); // You need to do 3*4, 3,0
-            dataMap.put((i + 4) + "", arrayToString(getTranspose(A2)[i])); //Extract column 1
+            dataMap.put(0 + "", Helper.arrayToString(A1[0])); // You need to do 0*4, 0,0
+            dataMap.put(1 + "", Helper.arrayToString(A1[1])); // You need to do 1*4, 1,0
+            dataMap.put(2 + "", Helper.arrayToString(A1[2])); // You need to do 2*4, 2,0
+            dataMap.put(3 + "", Helper.arrayToString(A1[3])); // You need to do 3*4, 3,0
+            dataMap.put((i + 4) + "", Helper.arrayToString(Helper.getTranspose(A2)[i])); //Extract column 1
         }
         dataMap.put("i", index + "");
         dataMap.put("j", index + "");
@@ -611,15 +611,17 @@ public class MainActivity extends AppCompatActivity {
         return dataMap;
     }
 
-    public int[][] getTranspose(int[][] A2) {
-        int[][] returnArr = new int[4][4];
-        for (int i = 0; i < A2.length; i++) {
-            for (int j = 0; j < A2[0].length; j++) {
-                returnArr[i][j] = A2[j][i];
-            }
-        }
-        return returnArr;
-    }
+    // Changed
+
+//    public int[][] getTranspose(int[][] A2) {
+//        int[][] returnArr = new int[4][4];
+//        for (int i = 0; i < A2.length; i++) {
+//            for (int j = 0; j < A2[0].length; j++) {
+//                returnArr[i][j] = A2[j][i];
+//            }
+//        }
+//        return returnArr;
+//    }
 
     /**
      * This function is run on the Master and is only invoked by the MasterCompute().
@@ -647,15 +649,17 @@ public class MainActivity extends AppCompatActivity {
         return dataMap;
     }
 
-    public String arrayToString(int[] A) {
-        String arrayString = "{";
-        for (int i = 0; i < A.length; i++) {
-            arrayString = arrayString + A[i] + ",";
-        }
-        arrayString = arrayString.substring(0, arrayString.length() - 1);
-        arrayString = arrayString + "}";
-        return arrayString;
-    }
+
+    // changed 2
+//    public String arrayToString(int[] A) {
+//        String arrayString = "{";
+//        for (int i = 0; i < A.length; i++) {
+//            arrayString = arrayString + A[i] + ",";
+//        }
+//        arrayString = arrayString.substring(0, arrayString.length() - 1);
+//        arrayString = arrayString + "}";
+//        return arrayString;
+//    }
 
     /**
      * Does the computation part on the Slave device. This function is accessible only if a
@@ -686,7 +690,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < iValues.length; i++) {
             for (int j = 0; j < jValues.length; j++) {
                 dataMap.put(iValues[i] + "," + (((int) jValues[j].charAt(0)) - 4 - 48),
-                        arrayRCMult(jsonObject.get(iValues[i]) + "", jsonObject.get(jValues[j]) + ""));
+                        Helper.arrayRCMult(jsonObject.get(iValues[i]) + "", jsonObject.get(jValues[j]) + ""));
             }
         }
         int time = Integer.parseInt(jsonObject.get("time") + "");
@@ -728,15 +732,17 @@ public class MainActivity extends AppCompatActivity {
      * We are sending only i row and j column, and the two arrays are multiplied and
      * summed up and returned as a String
      * */
-    public String arrayRCMult(String iV, String jV) {
-        int sum = 0;
-        for (int i = 0; i < iV.length(); i++) {
-            if (iV.charAt(i) >= '0' && iV.charAt(i) <= '9') {
-                sum = sum + (((int) (iV.charAt(i)) - 48) * ((int) (jV.charAt(i)) - 48));
-            }
-        }
-        return sum + "";
-    }
+
+    // Changed 3
+//    public String arrayRCMult(String iV, String jV) {
+//        int sum = 0;
+//        for (int i = 0; i < iV.length(); i++) {
+//            if (iV.charAt(i) >= '0' && iV.charAt(i) <= '9') {
+//                sum = sum + (((int) (iV.charAt(i)) - 48) * ((int) (jV.charAt(i)) - 48));
+//            }
+//        }
+//        return sum + "";
+//    }
 
     /**
      * This function does the recombination part on the Master side. The function is invoked when a slave responds with
@@ -771,10 +777,10 @@ public class MainActivity extends AppCompatActivity {
      * */
     public void generateOutputs() {
         String row1, row2, row3, row4, est1, est2;
-        row1 = ar2String(Out[0]);
-        row2 = ar2String(Out[1]);
-        row3 = ar2String(Out[2]);
-        row4 = ar2String(Out[3]);
+        row1 = Helper.ar2String(Out[0]);
+        row2 = Helper.ar2String(Out[1]);
+        row3 = Helper.ar2String(Out[2]);
+        row4 = Helper.ar2String(Out[3]);
         est1 = "Estimate Time using Offloading is: " + (System.currentTimeMillis() - globalStart) + "ms \n(each failure requires additional 250 ms, probability of failure is subject to battery level and distance)";
         long currentT = System.currentTimeMillis();
         computeMatrix();
@@ -786,7 +792,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Code for regular matrix multiplication without using offloading on Master.
      * */
-    public void computeMatrix() {
+       public void computeMatrix() {
         int[][] outMat = new int[4][4];
         for(int i=0; i<A1.length; i++) {
             for(int j = 0; j<A2.length; j++) {
@@ -802,13 +808,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public String ar2String(int[] arr) {
-        String out = "";
-        for(int i = 0; i<arr.length; i++) {
-            out = out + arr[i] + "\t\t";
-        }
-        return out;
-    }
+//    public String ar2String(int[] arr) {
+//        String out = "";
+//        for(int i = 0; i<arr.length; i++) {
+//            out = out + arr[i] + "\t\t";
+//        }
+//        return out;
+//    }
 
     public void initialConnect(String tempMsg) throws JSONException {
         read_msg_box.setText(tempMsg);
