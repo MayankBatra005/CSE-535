@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="fill_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
 
         <TextView
@@ -21,7 +21,7 @@
             android:text="@string/conxn_status"
             android:textAlignment="center"
             android:textColor="@android:color/background_light"
-            android:textSize="32dp"
+            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/peerListView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
 
         <Button
             android:id="@+id/getButton"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -72,11 +72,11 @@
 
         <Button
             android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="80dp"
+            android:layout_marginStart="140dp"
             android:layout_marginTop="370dp"
             android:layout_toEndOf="@+id/peerListView"
             android:backgroundTint="@android:color/background_dark"
