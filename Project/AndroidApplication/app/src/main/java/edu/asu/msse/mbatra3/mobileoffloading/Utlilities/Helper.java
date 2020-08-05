@@ -69,7 +69,7 @@ public class Helper {
     public static String ar2String(int[] arr) {
         String out = "";
         for(int i = 0; i<arr.length; i++) {
-            out = out + arr[i] + "\t\t";
+            out = out + arr[i] + "        \t";
         }
         return out;
     }
