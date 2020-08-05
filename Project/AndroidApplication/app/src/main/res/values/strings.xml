@@ -8,4 +8,5 @@
     <string name="monitor_connections">Monitor Device Connections</string>
     <string name="offload_matrix_calculation">Offload matrix Calculation</string>
     <string name="extract_device_data">Extract Device Data</string>
+    <string name="Resultant_matrix">Resultant Matrix After Offloading</string>
 </resources>
