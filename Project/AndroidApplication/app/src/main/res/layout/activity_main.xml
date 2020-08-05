@@ -8,7 +8,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent">
 
 
@@ -17,12 +17,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Connecting..."
-            android:textSize="32dp"
-            android:textAlignment="center"
             android:backgroundTint="@android:color/background_dark"
+            android:text="Connecting..."
+            android:textAlignment="center"
             android:textColor="@android:color/background_light"
-            app:layout_constraintBottom_toTopOf="@+id/getButton"
+            android:textSize="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/peerListView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonDiscover" />
@@ -58,17 +58,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="370dp"
             android:layout_marginEnd="40dp"
-            android:layout_marginBottom="400dp"
             android:layout_toEndOf="@+id/peerListView"
             android:backgroundTint="@android:color/background_dark"
             android:text="GET INFO"
             android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/peerListView"
-            app:layout_constraintTop_toBottomOf="@+id/buttonDiscover" />
+            app:layout_constraintStart_toEndOf="@+id/btnCompute"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/sendButton"
@@ -76,16 +76,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="200dp"
+            android:layout_marginTop="370dp"
             android:layout_toEndOf="@+id/peerListView"
             android:backgroundTint="@android:color/background_dark"
             android:text="SEND INFO"
             android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/peerListView"
+            app:layout_constraintEnd_toStartOf="@+id/btnCompute"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -96,11 +94,11 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="200dp"
             android:layout_marginBottom="350dp"
-            android:text="MESSAGE"
-            android:textSize="22dp"
             android:backgroundTint="@android:color/background_dark"
-            android:textColor="@android:color/background_light"
+            android:text="MESSAGE"
             android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="22dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,8 +111,8 @@
             android:layout_alignBottom="@+id/readMsg"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="300dp"
-            android:text="Matrix 1"
             android:backgroundTint="@android:color/background_dark"
+            android:text="Matrix 1"
             android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -127,9 +125,9 @@
             android:layout_alignBottom="@+id/matrix1label"
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="285dp"
+            android:backgroundTint="@android:color/background_dark"
             android:ems="10"
             android:inputType="text"
-            android:backgroundTint="@android:color/background_dark"
             android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -140,11 +138,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/Matrix1Text"
-            android:backgroundTint="@android:color/background_dark"
-            android:textColor="@android:color/background_light"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="255dp"
+            android:backgroundTint="@android:color/background_dark"
             android:text="Matrix 2"
+            android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -155,10 +153,10 @@
             android:layout_alignEnd="@+id/Matrix1Text"
             android:layout_alignBottom="@+id/matrix2label"
             android:layout_marginBottom="255dp"
-            android:ems="10"
             android:backgroundTint="@android:color/background_dark"
-            android:textColor="@android:color/background_light"
+            android:ems="10"
             android:inputType="text"
+            android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/matrix2label"
@@ -166,13 +164,15 @@
 
         <Button
             android:id="@+id/btnCompute"
-            android:layout_width="wrap_content"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/Matrix2Text"
             android:layout_centerHorizontal="true"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="100dp"
             android:backgroundTint="@android:color/background_dark"
-            android:textColor="@android:color/background_light"
             android:text="Offload matrix Calculation"
+            android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
