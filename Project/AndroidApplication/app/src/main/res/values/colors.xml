@@ -10,13 +10,13 @@
 <!--    <color name="colorAccent">#D81B60</color>-->
 
 
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+<!--    <color name="colorPrimary">#008577</color>-->
+<!--    <color name="colorPrimaryDark">#00574B</color>-->
+<!--    <color name="colorAccent">#D81B60</color>-->
     <color name="materialBlue">#63ccff</color>
     <color name="materialDarkBlue">#006db3</color>
     <color name="materialPurple">#975eff</color>
-    <color name="white">#ffffff</color>
+<!--    <color name="white">#ffffff</color>-->
     <color name="materialTeal">#62ebff</color>
     <color name="materialPink">#ff6dff</color>
     <color name="materialDarkPink">#b0003a</color>
@@ -27,5 +27,17 @@
     <color name="materialYellow">#ffff52</color>
     <color name="materialMidYellow">#c7a500</color>
     <color name="materialDarkYellow">#ffd600</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="Pink">#ee42f4</color>
+    <color name="Blue">#3158b2</color>
+    <color name="social_grey">#bf111f</color>
+    <color name ="mustard">#f49b42</color>
+    <color name="green">#3dc930</color>
+    <color name="lightGreen">#30c98e</color>
+    <color name="white">#fcfffe</color>
+    <color name="purpleMaterial">#ce93d8</color>
+    <color name="purpleMaterialLight">#ffc4ff</color>
 
 </resources>

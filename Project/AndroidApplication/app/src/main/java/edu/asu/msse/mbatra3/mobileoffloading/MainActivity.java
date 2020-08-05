@@ -808,14 +808,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    public String ar2String(int[] arr) {
-//        String out = "";
-//        for(int i = 0; i<arr.length; i++) {
-//            out = out + arr[i] + "\t\t";
-//        }
-//        return out;
-//    }
-
     public void initialConnect(String tempMsg) throws JSONException {
         read_msg_box.setText(tempMsg);
         JSONObject jsonObject = new JSONObject(tempMsg);
@@ -885,21 +877,4 @@ public class MainActivity extends AppCompatActivity {
         sendReceive.write(msg.getBytes());
     }
 
-//    public int[][] convertStringToArray(String input) {
-////        input = input.trim().replaceAll("\\ ", "");
-////        input = input+",";
-////        int[][] outArr = new int[4][4];
-////        int loopI = 0, loopJ = 0;
-////        input = input.replaceAll("\\{","");
-////        input = input.substring(0,input.length()-2) + ",";
-////        String[] items = input.split("\\},");
-////        for(int i=0; i<items.length; i++) {
-////            String item = items[i] + ",";
-////            String[] itemRow = item.split(",");
-////            for(int j=0; j<itemRow.length; j++) {
-////                outArr[i][j] = Integer.parseInt(itemRow[j].trim() + "");
-////            }
-////        }
-////        return outArr;
-////    }
 }
