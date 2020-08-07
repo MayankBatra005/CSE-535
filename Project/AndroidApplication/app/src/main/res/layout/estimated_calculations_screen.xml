@@ -3,13 +3,22 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_background">
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_background">
+
+    <TableRow>
+
     <TextView
         android:id="@+id/estimation"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/calculated_estimations"
         android:textColor="@android:color/background_dark"
         android:textSize="32sp"/>
+    </TableRow>
+    <TableRow>
     <TextView
         android:id="@+id/estimation1"
         android:layout_width="wrap_content"
@@ -18,7 +27,8 @@
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="12sp" />
-
+    </TableRow>
+    <TableRow>
     <TextView
         android:id="@+id/estimation2"
         android:layout_width="wrap_content"
@@ -27,4 +37,6 @@
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="22sp"/>
+    </TableRow>
+    </TableLayout>
 </LinearLayout>
