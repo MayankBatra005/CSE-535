@@ -2,10 +2,8 @@ package edu.asu.msse.mbatra3.mobileoffloading;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class EstimatedCalulationsView extends AppCompatActivity {

@@ -7,37 +7,24 @@
         android:id="@+id/estimation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-
-        android:text="Estimations"
+        android:text="@string/calculated_estimations"
         android:textColor="@android:color/background_dark"
-        android:textSize="32sp"
-        />
+        android:textSize="32sp"/>
     <TextView
         android:id="@+id/estimation1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/estimation"
-
-
-        android:text="TextView1"
+        android:text="@string/first_estimation"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
-        android:textSize="12sp"
-        />
-
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/estimation2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/estimation1"
-
-
-        android:text="TextView2"
+        android:text="@string/second_estimation"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
-        android:textSize="22sp"
-        />
-
+        android:textSize="22sp"/>
 </LinearLayout>

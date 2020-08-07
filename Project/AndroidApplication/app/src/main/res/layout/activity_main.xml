@@ -87,7 +87,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--From here -->
         <TextView
             android:id="@+id/readMsg"
             android:layout_width="wrap_content"
@@ -131,6 +130,7 @@
             android:backgroundTint="@android:color/background_dark"
             android:ems="10"
             android:inputType="text"
+            android:hint="@string/matrix_2_hint"
             android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -145,6 +145,7 @@
             android:layout_marginBottom="255dp"
             android:backgroundTint="@android:color/background_dark"
             android:text="@string/mtrx_2"
+
             android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -158,6 +159,7 @@
             android:layout_marginBottom="255dp"
             android:backgroundTint="@android:color/background_dark"
             android:ems="10"
+            android:hint="@string/matrix_t_hint"
             android:inputType="text"
             android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
