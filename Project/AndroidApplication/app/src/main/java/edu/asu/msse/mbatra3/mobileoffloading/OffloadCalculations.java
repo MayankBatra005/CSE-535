@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class OffloadCalculations extends AppCompatActivity {
+    public String estimate1,estimate2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +20,15 @@ public class OffloadCalculations extends AppCompatActivity {
         ((TextView) findViewById(R.id.row2)).setText(intent.getStringExtra("row2"));
         ((TextView) findViewById(R.id.row3)).setText(intent.getStringExtra("row3"));
         ((TextView) findViewById(R.id.row4)).setText(intent.getStringExtra("row4"));
-        ((TextView) findViewById(R.id.estimation1)).setText(intent.
-                getStringExtra("estimation1"));
-        ((TextView) findViewById(R.id.estimation2)).setText(intent.
-                getStringExtra("estimation2"));
+        estimate1=intent.getStringExtra("estimation1");
+        estimate2=intent.getStringExtra("estimation2");
+    }
+
+    public void navigateToEstimates(View view){
+        Intent intent=new Intent(this,EstimatedCalulationsView.class);
+        intent.putExtra("estimation1",estimate1);
+        intent.putExtra("estimation2",estimate2);
+        startActivity(intent);
+
     }
 }

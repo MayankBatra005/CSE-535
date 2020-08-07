@@ -9,4 +9,10 @@
     <string name="offload_matrix_calculation">Offload matrix Calculation</string>
     <string name="extract_device_data">Extract Device Data</string>
     <string name="Resultant_matrix">Resultant Matrix After Offloading</string>
+    <string name="calculated_matrix_result">Calculated Matrix Values</string>
+    <string name="row_1">row_1</string>
+    <string name="row_2">row_2</string>
+    <string name="row_3">row_3</string>
+    <string name="row_4">row_4</string>
+    <string name="estimations_screen">View Estimations</string>
 </resources>
