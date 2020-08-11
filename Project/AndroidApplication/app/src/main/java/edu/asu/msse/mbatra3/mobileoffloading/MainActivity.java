@@ -65,25 +65,25 @@ public class MainActivity extends AppCompatActivity {
     WifiP2pManager.Channel channel;
     BroadcastReceiver receiver;
     IntentFilter intentFilter;
-    Button btnDiscover;
-    ListView listView;
-    TextView connectionStatus;
+    Button discoveryButton;
+    ListView lv;
+    TextView conxnStatus;
     List<WifiP2pDevice> peers = new ArrayList<WifiP2pDevice>();
     ArrayList<Parcelable> dummy = new ArrayList<>();
-    String[] deviceNameArray;
-    WifiP2pDevice[] deviceArray;
-    TextView battery, read_msg_box;
-    Button btLocation, btBattery, btnSend, btnCompute, btnDisconnect;
-    TextView t1, t2, t3, t4, t5;
-    FusedLocationProviderClient fusedLocationClient;
-    EditText matrix1, matrix2;
-    public long globalStart;
+    String[] devicesNam;
+    WifiP2pDevice[] p2pDevices;
+    TextView battery, msgBox;
+    Button locationButton, btBattery, sendButton, computeButton, disconnectionButton;
+    TextView tv_1, tv_2, tv_3, tv_4, tv_5;
+    FusedLocationProviderClient locationClient;
+    EditText mtrx_1, mtrx_2;
+    public long globlInit;
     public ArrayList<String> addressMap = new ArrayList<String>();
-    public HashMap<String, Object> sendReceiveRegister = new HashMap<>();
+    public HashMap<String, Object> sndRcvReg = new HashMap<>();
     public HashMap<String, String> batteryLevels = new HashMap<>();
     public String OWNER = "SLAVE";
-    public int[][] A1 = new int[4][4];
-    public int[][] A2 = new int[4][4];
+    public int[][] A_1 = new int[4][4];
+    public int[][] A_2 = new int[4][4];
     public int[][] Out = new int[4][4];
     public static int counter = 0;
     String data = null;
@@ -96,11 +96,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        read_msg_box = findViewById(R.id.readMsg);
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        msgBox = findViewById(R.id.readMsg);
+        locationClient = LocationServices.getFusedLocationProviderClient(this);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        globalStart-=800;
+        globlInit -=800;
         init();
         callListener();
     }
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
     private void getLocation() {
-        fusedLocationClient.getLastLocation()
+        locationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
     public void disconnectPeers(int position) {
-        final WifiP2pDevice device = deviceArray[findPos(addressMap.get(position))];
+        final WifiP2pDevice device = p2pDevices[findPos(addressMap.get(position))];
         System.out.println("Device Name is - " + device.deviceName);
         if (device.status == WifiP2pDevice.CONNECTED) {
             manager.removeGroup(channel, new WifiP2pManager.ActionListener() {
@@ -203,30 +203,30 @@ public class MainActivity extends AppCompatActivity {
     }
     private void callListener() {
 
-        btnDiscover.setOnClickListener(new View.OnClickListener() {
+        discoveryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
                     @Override
                     public void onSuccess() {
                         Log.i("Discovery Started","XY Found");
-                        connectionStatus.setText("Discovery Started");
+                        conxnStatus.setText("Discovery Started");
                     }
                     @Override
                     public void onFailure(int reason) {
                         Log.i("Discovery Started","Peer not Found");
-                        connectionStatus.setText("Discovery Failed");
+                        conxnStatus.setText("Discovery Failed");
                     }
                 });
             }
         });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 connect(position);
             }
         });
-        btLocation.setOnClickListener(new View.OnClickListener() {
+        locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(ActivityCompat.checkSelfPermission(MainActivity.this,
@@ -246,21 +246,21 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        btnCompute.setOnClickListener(new View.OnClickListener() {
+        computeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Helper help=new Helper();
-                A1 = help.convertStringToArray(String.valueOf(matrix1.getText()));
-                A2 = help.convertStringToArray(String.valueOf(matrix2.getText()));
+                A_1 = help.convertStringToArray(String.valueOf(mtrx_1.getText()));
+                A_2 = help.convertStringToArray(String.valueOf(mtrx_2.getText()));
                 try {
-                    globalStart = System.currentTimeMillis();
+                    globlInit = System.currentTimeMillis();
                     masterCompute();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         });
-        btnSend.setOnClickListener(new View.OnClickListener() {
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 JSONObject jsonObj = new JSONObject(Data.getInstance().getSlaveInformationMap());
@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void connect(int position) {
-        final WifiP2pDevice device = deviceArray[position];
+        final WifiP2pDevice device = p2pDevices[position];
         WifiP2pConfig config = new WifiP2pConfig();
         config.deviceAddress = device.deviceAddress;
         manager.connect(channel, config, new WifiP2pManager.ActionListener() {
@@ -290,14 +290,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void init() {
-        btnDiscover = findViewById(R.id.buttonDiscover);
-        listView = findViewById(R.id.peerListView);
-        connectionStatus = findViewById(R.id.connectionStatus);
-        btnSend = findViewById(R.id.sendButton);
-        btnCompute = findViewById(R.id.btnCompute);
-        btLocation = findViewById(R.id.getButton);
-        matrix1 = findViewById(R.id.Matrix1Text);
-        matrix2 = findViewById(R.id.Matrix2Text);
+        discoveryButton = findViewById(R.id.buttonDiscover);
+        lv = findViewById(R.id.peerListView);
+        conxnStatus = findViewById(R.id.connectionStatus);
+        sendButton = findViewById(R.id.sendButton);
+        computeButton = findViewById(R.id.btnCompute);
+        locationButton = findViewById(R.id.getButton);
+        mtrx_1 = findViewById(R.id.Matrix1Text);
+        mtrx_2 = findViewById(R.id.Matrix2Text);
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         manager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
         assert manager != null;
@@ -315,17 +315,17 @@ public class MainActivity extends AppCompatActivity {
             if (!peerList.getDeviceList().equals(peers)) {
                 peers.clear();
                 peers.addAll(peerList.getDeviceList());
-                deviceNameArray = new String[peerList.getDeviceList().size()];
-                deviceArray = new WifiP2pDevice[peerList.getDeviceList().size()];
+                devicesNam = new String[peerList.getDeviceList().size()];
+                p2pDevices = new WifiP2pDevice[peerList.getDeviceList().size()];
                 int index = 0;
                 for (WifiP2pDevice device : peerList.getDeviceList()) {
-                    deviceNameArray[index] = device.deviceName;
-                    deviceArray[index] = device;
+                    devicesNam[index] = device.deviceName;
+                    p2pDevices[index] = device;
                     index++;
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                        android.R.layout.simple_list_item_1, deviceNameArray);
-                listView.setAdapter(arrayAdapter);
+                        android.R.layout.simple_list_item_1, devicesNam);
+                lv.setAdapter(arrayAdapter);
             }
             if (peers.size() == 0) {
                 Toast.makeText(getApplicationContext(), "No Device Found", Toast.LENGTH_SHORT)
@@ -338,11 +338,11 @@ public class MainActivity extends AppCompatActivity {
         public void onConnectionInfoAvailable(WifiP2pInfo info) {
             final InetAddress groupOwnerAddress = info.groupOwnerAddress;
             if (info.groupFormed && info.isGroupOwner) {
-                connectionStatus.setText("Host");
+                conxnStatus.setText("Host");
                 serverClass = new ServerClass();
                 serverClass.start();
             } else if (info.groupFormed) {
-                connectionStatus.setText("Client");
+                conxnStatus.setText("Client");
                 clientClass = new ClientClass(groupOwnerAddress);
                 clientClass.start();
             }
@@ -441,7 +441,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        WifiP2pDevice device = deviceArray[findPos(addressMap.get(deviceIndex))];
+        WifiP2pDevice device = p2pDevices[findPos(addressMap.get(deviceIndex))];
         WifiP2pConfig config = new WifiP2pConfig();
         config.deviceAddress = device.deviceAddress;
         manager.connect(channel, config, new WifiP2pManager.ActionListener() {
@@ -454,8 +454,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public int findPos(String mac) {
-        for (int i = 0; i < deviceArray.length; i++) {
-            if (deviceArray[i].deviceAddress.equalsIgnoreCase(mac)) {
+        for (int i = 0; i < p2pDevices.length; i++) {
+            if (p2pDevices[i].deviceAddress.equalsIgnoreCase(mac)) {
                 return i;
             }
         }
@@ -464,7 +464,7 @@ public class MainActivity extends AppCompatActivity {
     public void masterCompute() throws InterruptedException {
         Toast.makeText(getApplicationContext(), "Master side tasks distributed",
                 Toast.LENGTH_SHORT).show();
-        connectionStatus.setText("Master");
+        conxnStatus.setText("Master");
         startPeriodicMonitoring();
         for (int i = 0; i < addressMap.size(); i++) {
             Log.i("Inside Master Compute"," for addressMap for i - " + i);
@@ -476,7 +476,7 @@ public class MainActivity extends AppCompatActivity {
                 offloadRegister.put("recoverBy", time);
                 offloadRegister.put("i", generatedMap.get("i"));
                 offloadRegister.put("j", generatedMap.get("j"));
-                sendReceiveRegister.put(addressMap.get(i), offloadRegister);
+                sndRcvReg.put(addressMap.get(i), offloadRegister);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -486,11 +486,11 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, String> dataMap = new HashMap<>();
         dataMap.put("index", index + "");
         for (int i = index * 2; i < index * 2 + 4; i++) {
-            dataMap.put(0 + "", Helper.arrayToString(A1[0]));
-            dataMap.put(1 + "", Helper.arrayToString(A1[1]));
-            dataMap.put(2 + "", Helper.arrayToString(A1[2]));
-            dataMap.put(3 + "", Helper.arrayToString(A1[3]));
-            dataMap.put((i + 4) + "", Helper.arrayToString(Helper.getTranspose(A2)[i]));
+            dataMap.put(0 + "", Helper.arrayToString(A_1[0]));
+            dataMap.put(1 + "", Helper.arrayToString(A_1[1]));
+            dataMap.put(2 + "", Helper.arrayToString(A_1[2]));
+            dataMap.put(3 + "", Helper.arrayToString(A_1[3]));
+            dataMap.put((i + 4) + "", Helper.arrayToString(Helper.getTranspose(A_2)[i]));
         }
         dataMap.put("i", index + "");
         dataMap.put("j", index + "");
@@ -520,7 +520,7 @@ public class MainActivity extends AppCompatActivity {
     public void slaveComputation(String jsonString) throws JSONException {
         Toast.makeText(getApplicationContext(), "Offload computation started",
                 Toast.LENGTH_SHORT).show();
-        connectionStatus.setText("Slave");
+        conxnStatus.setText("Slave");
         long start = System.currentTimeMillis();
         JSONObject jsonObject = new JSONObject(jsonString);
         String mac = jsonObject.getString("mac");
@@ -595,7 +595,7 @@ public class MainActivity extends AppCompatActivity {
             Out[iVal][jVal] = Integer.parseInt(jsonObject.get(keysList.get(i)).toString());
             System.out.println("Out Value - " + Out[iVal][jVal]);
         }
-        sendReceiveRegister.remove(macAddress);
+        sndRcvReg.remove(macAddress);
         generateOutputs();
     }
     public void generateOutputs() {
@@ -605,7 +605,7 @@ public class MainActivity extends AppCompatActivity {
         row3 = Helper.ar2String(Out[2]);
         row4 = Helper.ar2String(Out[3]);
         est1 = "Estimated Offloading Time: " + (System.currentTimeMillis() -
-                globalStart) + "ms \n\n Failure requires additional 100 ms, Fail" +
+                globlInit) + "ms \n\n Failure requires additional 100 ms, Fail" +
                 "ure calculation depends on battery and proximity ";
         long currentT = System.currentTimeMillis();
         computeMatrix();
@@ -618,29 +618,29 @@ public class MainActivity extends AppCompatActivity {
     }
        public void computeMatrix() {
         int[][] outMat = new int[4][4];
-        for(int i=0; i<A1.length; i++) {
-            for(int j = 0; j<A2.length; j++) {
+        for(int i = 0; i< A_1.length; i++) {
+            for(int j = 0; j< A_2.length; j++) {
                 outMat[i][j] = 0;
             }
         }
-        for(int i=0; i<A1.length; i++) {
-            for(int j = 0; j<A2.length; j++) {
-                for(int k=0; k<A2.length; k++) {
-                    outMat[i][j] = outMat[i][j] + A1[i][k]*A2[k][j];
+        for(int i = 0; i< A_1.length; i++) {
+            for(int j = 0; j< A_2.length; j++) {
+                for(int k = 0; k< A_2.length; k++) {
+                    outMat[i][j] = outMat[i][j] + A_1[i][k]* A_2[k][j];
                 }
             }
         }
     }
     public void initialConnect(String tempMsg) throws JSONException {
-        read_msg_box.setText(tempMsg);
+        msgBox.setText(tempMsg);
         JSONObject jsonObject = new JSONObject(tempMsg);
     }
     public void startPeriodicMonitoring() throws InterruptedException {
         Thread periodMonitoring = new Thread();
         periodMonitoring.start();
-        while (sendReceiveRegister.size() > 0) {
+        while (sndRcvReg.size() > 0) {
             Thread.sleep(5000);
-            Set<String> keysToCopyIterator = sendReceiveRegister.keySet();
+            Set<String> keysToCopyIterator = sndRcvReg.keySet();
             Object[] keyList = keysToCopyIterator.toArray();
             for(int i=0; i<keyList.length; i++) {
                 connectIndex(addressMap.indexOf(keyList[i]));
@@ -648,7 +648,7 @@ public class MainActivity extends AppCompatActivity {
                 receiveAndSend.write("periodicMonitor".getBytes());
                 Thread.sleep(50);
                 HashMap<String, Object> deviceMap = (HashMap<String, Object>)
-                        sendReceiveRegister.get(String.valueOf(keyList[i]));
+                        sndRcvReg.get(String.valueOf(keyList[i]));
                 if(Integer.parseInt(deviceMap.get("battery").toString()) < 20) {
                     FailureComputation recovery=new FailureComputation();
                     recovery.failureRecovery(String.valueOf(keyList[i]),
@@ -660,13 +660,13 @@ public class MainActivity extends AppCompatActivity {
     public void failureRecovery(String macID) throws InterruptedException {
         Toast.makeText(getApplicationContext(), macID + " is at critical battery level!",
                 Toast.LENGTH_SHORT).show();
-        HashMap<String, Object> deviceMap = (HashMap<String, Object>) sendReceiveRegister.get(macID);
-        Set keySet = sendReceiveRegister.keySet();
+        HashMap<String, Object> deviceMap = (HashMap<String, Object>) sndRcvReg.get(macID);
+        Set keySet = sndRcvReg.keySet();
         for(int i=0; i<addressMap.size(); i++) {
             if(!keySet.contains(addressMap.get(i))) {
                 connectIndex(i);
-                sendReceiveRegister.remove(macID);
-                sendReceiveRegister.put(addressMap.get(i), deviceMap);
+                sndRcvReg.remove(macID);
+                sndRcvReg.put(addressMap.get(i), deviceMap);
                 HashMap<String, String> dataMap = generateMap(i);
                 JSONObject jsonObject = new JSONObject(dataMap);
                 String jsonString = jsonObject.toString();

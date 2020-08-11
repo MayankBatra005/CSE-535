@@ -13,13 +13,13 @@ public class FailureComputation {
         Toast.makeText(context, macID + " is at critical battery level!",
                 Toast.LENGTH_SHORT).show();
         HashMap<String, Object> deviceMap = (HashMap<String, Object>)
-                obj.sendReceiveRegister.get(macID);
-        Set keySet = obj.sendReceiveRegister.keySet();
+                obj.sndRcvReg.get(macID);
+        Set keySet = obj.sndRcvReg.keySet();
         for(int i=0; i<obj.addressMap.size(); i++) {
             if(!keySet.contains(obj.addressMap.get(i))) {
                 obj.connectIndex(i);
-                obj.sendReceiveRegister.remove(macID);
-                obj.sendReceiveRegister.put(obj.addressMap.get(i), deviceMap);
+                obj.sndRcvReg.remove(macID);
+                obj.sndRcvReg.put(obj.addressMap.get(i), deviceMap);
                 HashMap<String, String> dataMap = obj.generateMap(i);
                 JSONObject jsonObject = new JSONObject(dataMap);
                 String jsonString = jsonObject.toString();

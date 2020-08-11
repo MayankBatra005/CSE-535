@@ -53,7 +53,7 @@ public class NetworkRecver extends BroadcastReceiver {
                 mManager.requestConnectionInfo(mChannel, mActivity.connectionInfoListener);
             }
             else{
-                mActivity.connectionStatus.setText("Device Disconnected");
+                mActivity.conxnStatus.setText("Device Disconnected");
             }
         } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
             // Respond to this device's wifi state changing
