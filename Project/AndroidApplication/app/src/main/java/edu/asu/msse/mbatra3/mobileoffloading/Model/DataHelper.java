@@ -1,7 +1,6 @@
 package edu.asu.msse.mbatra3.mobileoffloading.Model;
 
 import android.content.Context;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

@@ -6,12 +6,9 @@
     android:isScrollContainer="false"
     android:background="@drawable/login_background"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
-
-
         <TextView
             android:id="@+id/connectionStatus"
             android:layout_width="wrap_content"
@@ -26,7 +23,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonDiscover" />
-
         <Button
             android:id="@+id/buttonDiscover"
             android:layout_width="wrap_content"
@@ -37,7 +33,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
         <ListView
             android:id="@+id/peerListView"
             android:layout_width="236dp"
@@ -51,7 +46,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonDiscover" />
-
         <Button
             android:id="@+id/getButton"
             android:layout_width="100dp"
@@ -69,7 +63,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnCompute"
             app:layout_constraintTop_toTopOf="parent" />
-
         <Button
             android:id="@+id/sendButton"
             android:layout_width="120dp"
@@ -86,7 +79,6 @@
             app:layout_constraintEnd_toStartOf="@+id/btnCompute"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/readMsg"
             android:layout_width="wrap_content"
@@ -105,7 +97,6 @@
             app:layout_constraintHorizontal_bias="0.428"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/matrix2label" />
-
         <TextView
             android:id="@+id/matrix1label"
             android:layout_width="wrap_content"
@@ -118,8 +109,6 @@
             android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-
         <EditText
             android:id="@+id/Matrix1Text"
             android:layout_width="wrap_content"
@@ -135,7 +124,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/matrix1label" />
-
         <TextView
             android:id="@+id/matrix2label"
             android:layout_width="wrap_content"
@@ -145,11 +133,9 @@
             android:layout_marginBottom="255dp"
             android:backgroundTint="@android:color/background_dark"
             android:text="@string/mtrx_2"
-
             android:textColor="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
         <EditText
             android:id="@+id/Matrix2Text"
             android:layout_width="wrap_content"
@@ -166,7 +152,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/matrix2label"
             app:layout_constraintTop_toBottomOf="@+id/Matrix1Text" />
-
         <Button
             android:id="@+id/btnCompute"
             android:layout_width="wrap_content"
@@ -183,6 +168,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Matrix2Text" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
