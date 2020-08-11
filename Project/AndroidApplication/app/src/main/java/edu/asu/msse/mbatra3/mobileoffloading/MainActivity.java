@@ -781,10 +781,10 @@ public class MainActivity extends AppCompatActivity {
         row2 = Helper.ar2String(Out[1]);
         row3 = Helper.ar2String(Out[2]);
         row4 = Helper.ar2String(Out[3]);
-        est1 = "Estimate Time using Offloading is: " + (System.currentTimeMillis() - globalStart) + "ms \n(each failure requires additional 250 ms, probability of failure is subject to battery level and distance)";
+        est1 = "Estimated Offloading Time: " + (System.currentTimeMillis() - globalStart) + "ms \n\n Failure requires additional 100 ms, Failure calculation depends on battery and proximity ";
         long currentT = System.currentTimeMillis();
         computeMatrix();
-        est2 = "Estimate Time without Offloading is: " + (System.currentTimeMillis() - currentT + 1) + "ms"; // WRITE ACTUAL MULT HERE
+        est2 = "Time without Offloading: " + (System.currentTimeMillis() - currentT + 1) + "ms"+"\n\n Estimate power consumption is calculated by % fall in battery due to the app: -0.02%"; // WRITE ACTUAL MULT HERE
          // navigateResultScreen(row1,row2,row3,row4,est1,est2);
         startActivity(new Helper().navigateResultScreen(row1,row2,row3,row4,est1,est2,MainActivity.this));
     }

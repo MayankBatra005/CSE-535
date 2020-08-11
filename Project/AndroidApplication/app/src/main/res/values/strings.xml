@@ -17,7 +17,7 @@
     <string name="estimations_screen">View Estimations</string>
     <string name="second_estimation">second estimation</string>
     <string name="first_estimation">first estimation</string>
-    <string name="calculated_estimations">Calculated Assesment of Estimates</string>
+    <string name="calculated_estimations">Offloading Estimations and Failure Analysis</string>
     <string name="matrix_t_hint">Accepted in Java format</string>
     <string name="matrix_2_hint">Accepted in Java format</string>
 </resources>
