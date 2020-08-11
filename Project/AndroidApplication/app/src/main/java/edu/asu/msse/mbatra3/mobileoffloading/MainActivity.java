@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     static final int MESSAGE_READ = 1;
     String uniqueID = UUID.randomUUID().toString();
     ServerCls serverCls;
-    ClientClass clientClass;
+    ClientCls clientCls;
     ReceiveAndSend receiveAndSend;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,18 +113,18 @@ public class MainActivity extends AppCompatActivity {
                     String tempMsg = new String(readBuff, 0, msg.arg1);
                     if (tempMsg.contains("\"time\"") && tempMsg.contains("\"i\"")) {
                         try {
-                            slaveComputation(tempMsg);
+                            slvCalulate(tempMsg);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     } else if (tempMsg.contains("offloadDone")) {
                         try {
-                            uponReceiving(tempMsg);
+                            receivedRequest(tempMsg);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     } else if (tempMsg.contains("periodicResponse")) {
-                        sendPeriodicResponse();
+                        generatePeriodResponses();
                     } else {
                         try {
                             Log.i("Temp Message",tempMsg);
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                 A_2 = help.convertStringToArray(String.valueOf(mtrx_2.getText()));
                 try {
                     globlInit = System.currentTimeMillis();
-                    masterCompute();
+                    mstrCalculate();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -343,8 +343,8 @@ public class MainActivity extends AppCompatActivity {
                 serverCls.start();
             } else if (info.groupFormed) {
                 conxnStatus.setText("Client");
-                clientClass = new ClientClass(groupOwnerAddress);
-                clientClass.start();
+                clientCls = new ClientCls(groupOwnerAddress);
+                clientCls.start();
             }
         }
     };
@@ -409,10 +409,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    public class ClientClass extends Thread {
+    public class ClientCls extends Thread {
         Socket socket;
         String hostAdd;
-        public ClientClass(InetAddress hostAddress) {
+        public ClientCls(InetAddress hostAddress) {
             hostAdd = hostAddress.getHostAddress();
             socket = new Socket();
         }
@@ -427,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    public void connectIndex(int deviceIndex) {
+    public void conxnIndx(int deviceIndex) {
         manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
             @Override
             public void onSuccess() {
@@ -461,11 +461,11 @@ public class MainActivity extends AppCompatActivity {
         }
         return 0;
     }
-    public void masterCompute() throws InterruptedException {
+    public void mstrCalculate() throws InterruptedException {
         Toast.makeText(getApplicationContext(), "Master side tasks distributed",
                 Toast.LENGTH_SHORT).show();
         conxnStatus.setText("Master");
-        startPeriodicMonitoring();
+        periodMonitor();
         for (int i = 0; i < addressMap.size(); i++) {
             Log.i("Inside Master Compute"," for addressMap for i - " + i);
             try {
@@ -499,7 +499,7 @@ public class MainActivity extends AppCompatActivity {
         return dataMap;
     }
     public HashMap<String, String> offloading(int index) throws JSONException {
-        connectIndex(index);
+        conxnIndx(index);
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
@@ -517,7 +517,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return dataMap;
     }
-    public void slaveComputation(String jsonString) throws JSONException {
+    public void slvCalulate(String jsonString) throws JSONException {
         Toast.makeText(getApplicationContext(), "Offload computation started",
                 Toast.LENGTH_SHORT).show();
         conxnStatus.setText("Slave");
@@ -557,7 +557,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        connectIndex(0);
+        conxnIndx(0);
         try {
             Thread.sleep(50);
         } catch (InterruptedException e) {
@@ -575,7 +575,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    public void uponReceiving(String jsonString) throws JSONException {
+    public void receivedRequest(String jsonString) throws JSONException {
         Toast.makeText(getApplicationContext(), "Tasks from slave devices received",
                 Toast.LENGTH_SHORT).show();
         JSONObject jsonObject = new JSONObject(jsonString);
@@ -596,9 +596,9 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Out Value - " + Out[iVal][jVal]);
         }
         sndRcvReg.remove(macAddress);
-        generateOutputs();
+        createOutputs();
     }
-    public void generateOutputs() {
+    public void createOutputs() {
         String row1, row2, row3, row4, est1, est2;
         row1 = Helper.ar2String(Out[0]);
         row2 = Helper.ar2String(Out[1]);
@@ -608,7 +608,7 @@ public class MainActivity extends AppCompatActivity {
                 globlInit) + "ms \n\n Failure requires additional 100 ms, Fail" +
                 "ure calculation depends on battery and proximity ";
         long currentT = System.currentTimeMillis();
-        computeMatrix();
+        calculateMatrices();
         est2 = "Time without Offloading: " + (System.currentTimeMillis() - currentT + 1) + "m" +
                 "s"+"\n\n Estimate power consum" +
                 "ption is calculated by % fall in bat" +
@@ -616,7 +616,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Helper().navigateResultScreen(
                 row1,row2,row3,row4,est1,est2,MainActivity.this));
     }
-       public void computeMatrix() {
+       public void calculateMatrices() {
         int[][] outMat = new int[4][4];
         for(int i = 0; i< A_1.length; i++) {
             for(int j = 0; j< A_2.length; j++) {
@@ -635,7 +635,7 @@ public class MainActivity extends AppCompatActivity {
         msgBox.setText(tempMsg);
         JSONObject jsonObject = new JSONObject(tempMsg);
     }
-    public void startPeriodicMonitoring() throws InterruptedException {
+    public void periodMonitor() throws InterruptedException {
         Thread periodMonitoring = new Thread();
         periodMonitoring.start();
         while (sndRcvReg.size() > 0) {
@@ -643,7 +643,7 @@ public class MainActivity extends AppCompatActivity {
             Set<String> keysToCopyIterator = sndRcvReg.keySet();
             Object[] keyList = keysToCopyIterator.toArray();
             for(int i=0; i<keyList.length; i++) {
-                connectIndex(addressMap.indexOf(keyList[i]));
+                conxnIndx(addressMap.indexOf(keyList[i]));
                 Thread.sleep(50);
                 receiveAndSend.write("periodicMonitor".getBytes());
                 Thread.sleep(50);
@@ -657,14 +657,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    public void failureRecovery(String macID) throws InterruptedException {
+    public void failRecover(String macID) throws InterruptedException {
         Toast.makeText(getApplicationContext(), macID + " is at critical battery level!",
                 Toast.LENGTH_SHORT).show();
         HashMap<String, Object> deviceMap = (HashMap<String, Object>) sndRcvReg.get(macID);
         Set keySet = sndRcvReg.keySet();
         for(int i=0; i<addressMap.size(); i++) {
             if(!keySet.contains(addressMap.get(i))) {
-                connectIndex(i);
+                conxnIndx(i);
                 sndRcvReg.remove(macID);
                 sndRcvReg.put(addressMap.get(i), deviceMap);
                 HashMap<String, String> dataMap = generateMap(i);
@@ -675,7 +675,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    public void sendPeriodicResponse() {
+    public void generatePeriodResponses() {
         getLocation();
         JSONObject jsonObj = new JSONObject(Data.getInstance().getSlaveInformationMap());
         String msg = jsonObj.toString();

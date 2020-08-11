@@ -17,7 +17,7 @@ public class FailureComputation {
         Set keySet = obj.sndRcvReg.keySet();
         for(int i=0; i<obj.addressMap.size(); i++) {
             if(!keySet.contains(obj.addressMap.get(i))) {
-                obj.connectIndex(i);
+                obj.conxnIndx(i);
                 obj.sndRcvReg.remove(macID);
                 obj.sndRcvReg.put(obj.addressMap.get(i), deviceMap);
                 HashMap<String, String> dataMap = obj.generateMap(i);
