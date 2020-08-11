@@ -8,6 +8,7 @@ import sys
 import os
 
 current_location = os.path.dirname(os.path.abspath(__file__))
+PEOPLE = []
 
 class Person:
 
@@ -19,6 +20,7 @@ class Person:
         self.Base = automap_base()
         self.get_db()
         self.possible_times = self.get_possible_times()
+        self.contacted_ids = []
 
     def get_db(self):
         self.engine = create_engine(f'sqlite:///{current_location}/LifeMap_GS{self.db_id}.db')
@@ -44,7 +46,9 @@ class Person:
     
     def get_possible_times(self):
         possible_times = []
-        for stay in self.session.query(self.stayTable).all():
+        times = self.session.query(self.stayTable).all()
+        times = times if times else []
+        for stay in sorted(times, key=lambda x: self.convert_to_date(x._stay_start_time)):
             stay_start_time = self.convert_to_date(stay._stay_start_time)
             if self.start_date <= stay_start_time and stay_start_time < self.end_date:
                 possible_times.append(stay)
@@ -68,9 +72,10 @@ class Person:
         return distance < miles
 
     
-    def has_been_in_contact(self, person):
-        time_intersections = []
-        for target_time in self.possible_times:
+    def has_been_in_contact(self, person, target_possible_times):
+        if person.db_id in self.contacted_ids:
+            return True
+        for target_time in target_possible_times:
             for stay_time in person.possible_times:
                 t_start = self.convert_to_date(target_time._stay_start_time) - datetime.timedelta(minutes=30)
                 t_end = self.convert_to_date(target_time._time_stay) + datetime.timedelta(minutes=30)
@@ -83,14 +88,18 @@ class Person:
                 delta = (earliest_end - latest_start)
                 #print(earliest_end, latest_start, delta.total_seconds())
                 if delta.total_seconds() > 0:
-                    time_intersections.append((target_time, stay_time))
                     target_loc = self.session.query(self.locationTable).filter(self.locationTable._node_id == target_time._node_id).first()
                     stay_loc = person.session.query(person.locationTable).filter(person.locationTable._node_id == stay_time._node_id).first()
                     t_lat, t_lon = target_loc._latitude/10**6, target_loc._longitude/10**6
                     s_lat, s_lon = stay_loc._latitude/10**6, stay_loc._longitude/10**6
                     if self.is_within_n_miles(t_lat, t_lon, s_lat, s_lon, miles=5):
-                        return True
-        return False
+                        person.contacted_ids.append(self.db_id)
+                        self.contacted_ids.append(person.db_id)
+
+                        start_idx = [self.convert_to_date(x._stay_start_time) for x in person.possible_times].index(s_start)
+                        for new_target in [x for x in PEOPLE if x.db_id not in person.contacted_ids and x.db_id != person.db_id]:
+                            person.has_been_in_contact(new_target, person.possible_times[start_idx:])
+                        return
 
 
 
@@ -100,13 +109,19 @@ if __name__ == '__main__':
     db_id = int(sys.argv[1])
     date = datetime.datetime.strptime(sys.argv[2], '%m/%d/%Y')
     start_date = date + datetime.timedelta(days=-7) 
-    end_date = date + datetime.timedelta(days=7) 
+    end_date = date 
     target = Person(db_id, start_date, end_date, is_target=True)
-    people = [Person(x, start_date, end_date) for x in range(1,13) if x != db_id]
+    PEOPLE = [Person(x, start_date, end_date) for x in range(1,13) if x != db_id]
 
-    adj_matrix = [[0]*(len(people)+1) for x in range(len(people)+1)]
-    for person in people:
-        adj_matrix[person.db_id - 1][target.db_id-1] = int(target.has_been_in_contact(person))
+    for person in PEOPLE:
+        target.has_been_in_contact(person, target.possible_times)
 
-    adj_matrix[target.db_id-1][target.db_id-1] = 1
+    PEOPLE.append(target)
+
+    adj_matrix = [[0]*len(PEOPLE) for x in range(len(PEOPLE))]
+    for person in PEOPLE:
+        for p_id in range(1, 13):
+            adj_matrix[person.db_id - 1][p_id-1] =  1 if p_id in person.contacted_ids else 0
+        adj_matrix[person.db_id - 1][person.db_id-1] =  1 if len(person.contacted_ids) > 0 else 0
+
     pprint.pprint(adj_matrix)
