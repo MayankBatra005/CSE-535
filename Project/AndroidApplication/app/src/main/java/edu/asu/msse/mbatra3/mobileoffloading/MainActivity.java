@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     String data = null;
     static final int MESSAGE_READ = 1;
     String uniqueID = UUID.randomUUID().toString();
-    ServerClass serverClass;
+    ServerCls serverCls;
     ClientClass clientClass;
     ReceiveAndSend receiveAndSend;
     @Override
@@ -339,8 +339,8 @@ public class MainActivity extends AppCompatActivity {
             final InetAddress groupOwnerAddress = info.groupOwnerAddress;
             if (info.groupFormed && info.isGroupOwner) {
                 conxnStatus.setText("Host");
-                serverClass = new ServerClass();
-                serverClass.start();
+                serverCls = new ServerCls();
+                serverCls.start();
             } else if (info.groupFormed) {
                 conxnStatus.setText("Client");
                 clientClass = new ClientClass(groupOwnerAddress);
@@ -358,7 +358,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         registerReceiver(receiver, intentFilter);
     }
-    public class ServerClass extends Thread {
+    public class ServerCls extends Thread {
         Socket socket;
         ServerSocket serverSocket;
         @Override
