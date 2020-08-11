@@ -21,7 +21,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.os.StrictMode;
-import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     String uniqueID = UUID.randomUUID().toString();
     ServerClass serverClass;
     ClientClass clientClass;
-    SendReceive sendReceive;
+    ReceiveAndSend receiveAndSend;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         globalStart-=800;
-        initialize();
+        init();
         callListener();
     }
     Handler handler = new Handler(new Handler.Callback() {
@@ -268,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
                 String msgString = jsonObj.toString();
                 String msg = msgString;
                 Data.getInstance().viewMapContents();
-                sendReceive.write(msg.getBytes());
+                receiveAndSend.write(msg.getBytes());
             }
         });
     }
@@ -290,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void initialize() {
+    private void init() {
         btnDiscover = findViewById(R.id.buttonDiscover);
         listView = findViewById(R.id.peerListView);
         connectionStatus = findViewById(R.id.connectionStatus);
@@ -367,18 +366,18 @@ public class MainActivity extends AppCompatActivity {
             try {
                 serverSocket = new ServerSocket(8888);
                 socket = serverSocket.accept();
-                sendReceive = new SendReceive(socket);
-                sendReceive.start();
+                receiveAndSend = new ReceiveAndSend(socket);
+                receiveAndSend.start();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-    private class SendReceive extends Thread {
+    private class ReceiveAndSend extends Thread {
         private Socket socket;
         private InputStream inputStream;
         private OutputStream outputStream;
-        public SendReceive(Socket skt) {
+        public ReceiveAndSend(Socket skt) {
             socket = skt;
             try {
                 inputStream = socket.getInputStream();
@@ -421,8 +420,8 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             try {
                 socket.connect(new InetSocketAddress(hostAdd, 8888), 500);
-                sendReceive = new SendReceive(socket);
-                sendReceive.start();
+                receiveAndSend = new ReceiveAndSend(socket);
+                receiveAndSend.start();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -510,7 +509,7 @@ public class MainActivity extends AppCompatActivity {
         JSONObject jsonObj = new JSONObject(dataMap);
         String jsonString = jsonObj.toString();
         String msg = jsonString;
-        sendReceive.write(msg.getBytes());
+        receiveAndSend.write(msg.getBytes());
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
@@ -569,7 +568,7 @@ public class MainActivity extends AppCompatActivity {
         String msg = returnString;
         Toast.makeText(getApplicationContext(), "Slave side computation completed",
                 Toast.LENGTH_SHORT).show();
-        sendReceive.write(msg.getBytes());
+        receiveAndSend.write(msg.getBytes());
         try {
             Thread.sleep(50);
         } catch (InterruptedException e) {
@@ -646,7 +645,7 @@ public class MainActivity extends AppCompatActivity {
             for(int i=0; i<keyList.length; i++) {
                 connectIndex(addressMap.indexOf(keyList[i]));
                 Thread.sleep(50);
-                sendReceive.write("periodicMonitor".getBytes());
+                receiveAndSend.write("periodicMonitor".getBytes());
                 Thread.sleep(50);
                 HashMap<String, Object> deviceMap = (HashMap<String, Object>)
                         sendReceiveRegister.get(String.valueOf(keyList[i]));
@@ -671,7 +670,7 @@ public class MainActivity extends AppCompatActivity {
                 HashMap<String, String> dataMap = generateMap(i);
                 JSONObject jsonObject = new JSONObject(dataMap);
                 String jsonString = jsonObject.toString();
-                sendReceive.write(jsonString.getBytes());
+                receiveAndSend.write(jsonString.getBytes());
                 Thread.sleep(50);
             }
         }
@@ -680,6 +679,6 @@ public class MainActivity extends AppCompatActivity {
         getLocation();
         JSONObject jsonObj = new JSONObject(Data.getInstance().getSlaveInformationMap());
         String msg = jsonObj.toString();
-        sendReceive.write(msg.getBytes());
+        receiveAndSend.write(msg.getBytes());
     }
 }
