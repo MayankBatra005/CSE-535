@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     });
-    BroadcastReceiver batteryInfo = new BroadcastReceiver() {
+    BroadcastReceiver bttryInformation = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             int batteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                                 Data.getInstance().getSlaveInformationMap().put("longitude",
                                         addresses.get(0).getLongitude() + "");
                                 Data.getInstance().viewMapContents();
-                                saveToTxt(data);
+                                createNotes(data);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-    public void disconnectPeers(int position) {
+    public void disconnectWifiPeers(int position) {
         final WifiP2pDevice device = p2pDevices[findPos(addressMap.get(position))];
         System.out.println("Device Name is - " + device.deviceName);
         if (device.status == WifiP2pDevice.CONNECTED) {
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-    private void saveToTxt(String content) {
+    private void createNotes(String content) {
         try {
             File path = getExternalFilesDir(null);
             File file = new File(path, "Location.txt");
@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                connect(position);
+                connxn(position);
             }
         });
         locationButton.setOnClickListener(new View.OnClickListener() {
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("Get info button clicked","Getting Battery information in b" +
                         "tLocation");
                 Data.getInstance().viewMapContents();
-                MainActivity.this.registerReceiver(MainActivity.this.batteryInfo,
+                MainActivity.this.registerReceiver(MainActivity.this.bttryInformation,
                         new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
             }
 
@@ -271,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void connect(int position) {
+    private void connxn(int position) {
         final WifiP2pDevice device = p2pDevices[position];
         WifiP2pConfig config = new WifiP2pConfig();
         config.deviceAddress = device.deviceAddress;
@@ -309,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
     }
-    WifiP2pManager.PeerListListener peerListListener = new WifiP2pManager.PeerListListener() {
+    WifiP2pManager.PeerListListener wifiPeersListnr = new WifiP2pManager.PeerListListener() {
         @Override
         public void onPeersAvailable(WifiP2pDeviceList peerList) {
             if (!peerList.getDeviceList().equals(peers)) {
@@ -333,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-    WifiP2pManager.ConnectionInfoListener connectionInfoListener = new WifiP2pManager.ConnectionInfoListener() {
+    WifiP2pManager.ConnectionInfoListener conxnInformationListener = new WifiP2pManager.ConnectionInfoListener() {
         @Override
         public void onConnectionInfoAvailable(WifiP2pInfo info) {
             final InetAddress groupOwnerAddress = info.groupOwnerAddress;

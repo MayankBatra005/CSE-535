@@ -38,7 +38,7 @@ public class NetworkRecver extends BroadcastReceiver {
         } else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
             // Call WifiP2pManager.requestPeers() to get a list of current peers
             if (mManager!=null){
-                mManager.requestPeers(mChannel,mActivity.peerListListener);
+                mManager.requestPeers(mChannel,mActivity.wifiPeersListnr);
             }
 
         } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
@@ -50,7 +50,7 @@ public class NetworkRecver extends BroadcastReceiver {
 
             assert networkInfo != null;
             if (networkInfo.isConnected()){
-                mManager.requestConnectionInfo(mChannel, mActivity.connectionInfoListener);
+                mManager.requestConnectionInfo(mChannel, mActivity.conxnInformationListener);
             }
             else{
                 mActivity.conxnStatus.setText("Device Disconnected");
